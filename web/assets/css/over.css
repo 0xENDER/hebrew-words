@@ -1,0 +1,16 @@
+/**
+ *
+ * Styles for loading screen, splash, etc.
+ *
+**/
+
+html, body {
+    color-scheme: dark;
+    scroll-behavior: auto;
+}
+
+body {
+    margin: 0px;
+    background-color: #121213;
+    padding-bottom: calc(100vh - 47px - 8 * 42px);
+}

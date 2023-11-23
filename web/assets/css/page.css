@@ -1,17 +1,8 @@
 /**
  *
- * Main page style
+ * Basic page style for the table
  *
 **/
-
-* {
-    color-scheme: dark;
-}
-
-body {
-    margin: 0px;
-    background-color: #121213;
-}
 
 .table {
     text-align: center;
