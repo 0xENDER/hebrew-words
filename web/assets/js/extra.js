@@ -9,7 +9,7 @@
 const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 },
-DATA_SLEEP = 0, RENDER_SLEEP = 0;
+DATA_SLEEP = 10, RENDER_SLEEP = 0;
 
 // Block row rendering when not needed!
 const renderBlock = () => {
