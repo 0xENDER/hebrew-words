@@ -31,15 +31,7 @@ window.onclick = function(e){
         hideContextMenus();
     }
 }
-
-// Show Row context menu
-function showRowContextMenu(e, rowElm){
-    showContextMenu();
-}
-// Show Page context menu
-function showPageContextMenu(e) {
-    //
-}
+window.onblur = hideContextMenus;
 
 // Hide all context menus
 function hideContextMenus(){
@@ -52,12 +44,48 @@ function hideContextMenus(){
 
 // Show a context menu
 function showContextMenu(e, elm){
-    console.log(e.y, e.x);
     focusZone.style.display = null;
     elm.style.display = null;
+    // Keep track of the saved elm
+    elm.TARGET_ROW = e.srcElement.parentElement;
+    // Change the position of the context menu
     setTimeout(() => {
         let x = (e.x + elm.clientWidth < window.innerWidth) ? e.x : e.x - elm.clientWidth;
         elm.style.top = e.y + "px";
         elm.style.left = x + "px";
     }, 0);
 }
+
+// Manage row status
+const redRowButton = document.getElementById("row-colour-red"),
+    yellowRowButton = document.getElementById("row-colour-yellow"),
+    greenRowButton = document.getElementById("row-colour-green"),
+    blueRowButton = document.getElementById("row-colour-blue"),
+    coloursList = ["none", "yellow", "red", "green", "blue"];
+function replaceRowColour(rowElm, status){
+    for (let c in coloursList){
+        rowElm.classList.remove(c);
+    }
+    rowElm.classList.add(coloursList[status]);
+}
+function replaceRowsColour(rowElm, status){
+    let l = Number(rowElm.dataset.rankC);
+    replaceRowColour(rowElm, status);
+    if(l > 1){
+        let rank = rowElm.dataset.rank;
+        for (let i = 0; i < l; i++){
+            replaceRowColour(document.getElementById(`${rank}_${i + 1}`), status);
+        }
+    }
+}
+async function setRowColourStt(status){
+    let rank = Number(rowCM.TARGET_ROW.dataset.rank)
+    let r = await updateWrdIDB({rank, status});
+    if(r != null){
+        replaceRowsColour(rowCM.TARGET_ROW, status);
+    }
+}
+yellowRowButton.onclick = () => setRowColourStt(1);
+redRowButton.onclick = () => setRowColourStt(2);
+greenRowButton.onclick = () => setRowColourStt(3);
+blueRowButton.onclick = () => setRowColourStt(4);

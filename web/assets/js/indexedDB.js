@@ -91,6 +91,27 @@ async function addWrdtoIDB(db, obj){
     return [r, fObj];
 }
 
+// Update an existing word
+function uptWrdtoIDB(db, obj){
+    return new Promise(async (resolve) => {
+        const objSt = getWrdLstObj(db);
+        // Get already saved data and combine it with the new data
+        let nData;
+        const rq = objSt.get(obj.rank);    
+        rq.onsuccess = async () => {
+            nData = {...rq.result, ...obj}
+            // Save the combined new data
+            let r = objSt.put(nData);
+            // Keep track of the IDB_COUNT value!
+            IDB_COUNT = await getWrdLstCnt(db);
+            resolve([r, nData]);
+        }
+        rq.onerror = () => {
+            resolve([r, null]);
+        };
+    });
+}
+
 // Get all words from IDB
 function getAllWrdIDB(db){
     // Return a promise

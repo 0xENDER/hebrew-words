@@ -22,3 +22,18 @@ async function getWrdsIDB(callback){
     }
     return data;
 }
+
+// Update the status of a word in IDB
+async function updWrdStt(rnk){
+    const db = await openWrdsIDB();
+    //store.put
+}
+
+// Update an existing word
+// Returns [response, newData]
+// On error, returns null
+async function updateWrdIDB(obj){
+    const db = await openWrdsIDB();
+    const r = await uptWrdtoIDB(db, obj);
+    return (r[1] != null) ? r : null;
+}

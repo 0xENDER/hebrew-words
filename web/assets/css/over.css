@@ -22,3 +22,8 @@ body {
     margin: auto;
     padding-bottom: calc(100vh - 75px - 8 * 50px);
 }
+
+[disabled] {
+    pointer-events: none;
+    opacity: 0.4;
+}
