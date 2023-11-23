@@ -4,6 +4,115 @@
  *
 **/
 
-text {
+* {
+    color-scheme: dark;
+}
+
+body {
+    margin: 0px;
+    background-color: #121213;
+}
+
+.table {
+    text-align: center;
     font-family: Calibri, Arial, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table .row {
+    cursor: pointer;
+}
+
+.table .row td:nth-child(4) {
+    font-family: Narkisim, Times New Roman, Arial, serif;
+}
+
+.table td,
+.table th {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 8px;
+}
+
+.table th {
+    font-size: 1.4em;
+    text-align: center;
+    color: #ffffff;
+}
+
+.table .head {
+    position: sticky;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+}
+.table .head th {
+    padding: 10px 6px;
+    background-color: #121213;
+}
+
+.table .row.odd {
+    background-color: #161618;
+}
+
+.table .row.even {
+    background-color: #1f1f24;
+}
+
+.table .row:hover {
+    background-color: #32323b;
+
+}
+
+.table .row.red.odd {
+    background-color: #5e131c;
+}
+
+.table .row.red.even {
+    background-color: #642029;
+}
+
+.table .row.red:hover {
+    background-color: #7c3740;
+
+}
+
+.table .row.yellow.odd {
+    background-color: #5a4c1c;
+}
+
+.table .row.yellow.even {
+    background-color: #79672d;
+}
+
+.table .row.yellow:hover {
+    background-color: #8f7d44;
+
+}
+
+.table .row.green.odd {
+    background-color: #073b1f;
+}
+
+.table .row.green.even {
+    background-color: #0d4929;
+}
+
+.table .row.green:hover {
+    background-color: #1f613d;
+
+}
+
+.table .row.blue.odd {
+    background-color: #0f2a47;
+}
+
+.table .row.blue.even {
+    background-color: #173558;
+}
+
+.table .row.blue:hover {
+    background-color: #284a70;
+
 }
