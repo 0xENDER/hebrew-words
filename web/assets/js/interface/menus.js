@@ -64,7 +64,7 @@ const redRowButton = document.getElementById("row-colour-red"),
     coloursList = ["none", "yellow", "red", "green", "blue"];
 function replaceRowColour(rowElm, status){
     for (let c in coloursList){
-        rowElm.classList.remove(c);
+        rowElm.classList.remove(coloursList[c]);
     }
     rowElm.classList.add(coloursList[status]);
 }
