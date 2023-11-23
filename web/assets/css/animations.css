@@ -3,3 +3,22 @@
  * animations styles
  *
 **/
+
+.menu {
+    opacity: 0;
+    animation-name: fade-in-context-menu;
+    animation-duration: 0.1s;
+    animation-delay: 0.1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in-context-menu { 
+    from {
+        opacity: 0;
+        transform: scale(.98);
+    } to {
+        opacity: 1;
+        transform: scale(1);
+    }
+} 

@@ -7,6 +7,10 @@
 html, body {
     color-scheme: dark;
     scroll-behavior: auto;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    font-family: Calibri, Arial, sans-serif;
 }
 
 body {

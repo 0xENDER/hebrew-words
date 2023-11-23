@@ -6,7 +6,6 @@
 
 .table {
     text-align: center;
-    font-family: Calibri, Arial, sans-serif;
     width: 100%;
     border-collapse: collapse;
 }
@@ -65,9 +64,10 @@
     background-color: #1f1f24;
 }
 
-.table .row:hover {
+.table .row:hover,
+.table .row:focus,
+.table .row:active {
     background-color: #32323b;
-
 }
 
 .table .row.red.odd {
@@ -78,9 +78,10 @@
     background-color: #642029;
 }
 
-.table .row.red:hover {
+.table .row.red:hover,
+.table .row.red:focus,
+.table .row.red:active {
     background-color: #7c3740;
-
 }
 
 .table .row.yellow.odd {
@@ -91,9 +92,10 @@
     background-color: #79672d;
 }
 
-.table .row.yellow:hover {
+.table .row.yellow:hover,
+.table .row.yellow:focus,
+.table .row.yellow:active {
     background-color: #8f7d44;
-
 }
 
 .table .row.green.odd {
@@ -104,9 +106,10 @@
     background-color: #0d4929;
 }
 
-.table .row.green:hover {
+.table .row.green:hover,
+.table .row.green:focus,
+.table .row.green:active {
     background-color: #1f613d;
-
 }
 
 .table .row.blue.odd {
@@ -117,7 +120,8 @@
     background-color: #173558;
 }
 
-.table .row.blue:hover {
+.table .row.blue:hover,
+.table .row.blue:focus,
+.table .row.blue:active {
     background-color: #284a70;
-
 }
