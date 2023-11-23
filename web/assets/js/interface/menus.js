@@ -57,6 +57,7 @@ function showContextMenu(e, elm){
 }
 
 // Manage row status
+// MOVE THIS CODE TO INTERFACE.JS
 const redRowButton = document.getElementById("row-colour-red"),
     yellowRowButton = document.getElementById("row-colour-yellow"),
     greenRowButton = document.getElementById("row-colour-green"),
