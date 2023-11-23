@@ -69,12 +69,17 @@ function replaceRowColour(rowElm, status){
     rowElm.classList.add(coloursList[status]);
 }
 function replaceRowsColour(rowElm, status){
-    let l = Number(rowElm.dataset.rankC);
-    replaceRowColour(rowElm, status);
-    if(l > 1){
-        let rank = rowElm.dataset.rank;
-        for (let i = 0; i < l; i++){
-            replaceRowColour(document.getElementById(`${rank}_${i + 1}`), status);
+    if(rowElm.id.includes("_")){
+        replaceRowsColour(document.getElementById(rowElm.dataset.rank), status);
+    }else{
+        let l = Number(rowElm.dataset.rankC);
+        replaceRowColour(rowElm, status);
+        if(l > 1){
+            let rank = rowElm.dataset.rank;
+            for (let i = 0; i < l - 1; i++){
+                console.log(`${rank}_${i + 1}`);
+                replaceRowColour(document.getElementById(`${rank}_${i + 1}`), status);
+            }
         }
     }
 }

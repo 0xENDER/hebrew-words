@@ -45,7 +45,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     rankElm.innerText = rank;
     engElm.innerText = english;
     translitElm.innerText = transliteration;
-    hebElm.innerText = hebrew;
+    hebElm.innerText = (typeof rank == "number") ? hebrew : "";
     // Append children
     con.appendChild(rankElm);
     con.appendChild(engElm);
