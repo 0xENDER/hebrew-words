@@ -15,7 +15,6 @@
 async function getWrdsIDB(callback){
     const db = await openWrdsIDB();
     const data = await getAllWrdIDB(db);
-    console.table(data);
     for(let i = 0; i < data.length; i++){
         callback(data[i], false);
         await sleep(RENDER_SLEEP);

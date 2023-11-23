@@ -57,8 +57,7 @@ function openWrdsIDB(){
         }
         // This event is only implemented in recent browsers
         req.onupgradeneeded = (event) => {
-            //
-            console.log("AAAAAAAAAAAAAAAAAA");
+            console.log("IDB upgrade!");
             // Save the IDBDatabase interface
             const db = event.target.result;
   
@@ -103,7 +102,7 @@ function getAllWrdIDB(db){
         }
         req.onerror = (err)=> {
             showPrompt("Something went wrong!", "We couldn't retrieve your data!",);
-            console.error(`Error to get all students: ${err}`)
+            throw err;
         }
     });
 }
