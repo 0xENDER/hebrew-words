@@ -5,11 +5,10 @@
  **/
 
 
-// Open an IDB!
-openWrdsIDB((db)=>{
-    addWrdtoIDB(db, {});
-});
 // Add a word to IDB
-function createIDBWrd(){
-    //
+async function createIDBWrd(data){
+    const db = await openWrdsIDB();
+    return addWrdtoIDB(db, data);
 }
+
+// Add words list to IDB
