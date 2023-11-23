@@ -27,7 +27,7 @@ function showPrompt(title, message, ...args){
 //  </tr>
 let previousRank = -1,
     rowStatus = ["", "yellow", "red", "green", "blue"];
-function createWordRowDOM(hebrew, transliteration, english, status, rank = ""){
+function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
     let con = document.createElement('tr'),
         rankElm = document.createElement('td'),
         engElm = document.createElement('td'),
@@ -50,6 +50,9 @@ function createWordRowDOM(hebrew, transliteration, english, status, rank = ""){
     con.appendChild(hebElm);
     // Append row to the list
     TABLE_ELM.appendChild(con);
+    if(scrollToView){
+        con.scrollIntoView();
+    }
     // Keep track of previousRank
     if(typeof rank == "number"){
         con.rank = rank;
@@ -57,20 +60,13 @@ function createWordRowDOM(hebrew, transliteration, english, status, rank = ""){
     }else{
         con.rank = previousRank;
     }
+    // Delete used variables
+    delete con, rankElm, engElm, translitElm, hebElm, isOdd;
 }
 
-// Add a word to the list
-// Input: {
-//    "rank": <Number>,
-//    "status": <Number>,
-//    "hb": <String>,
-//    "phn": [
-//        <String>, ...
-//    ], "eng": [
-//        <String>, ...
-//    ]
-// }
-//
-function addWordToListUI(){
-    TABLE_ELM.appendChild();    
+async function createWordRows(word, scrollToView = true){
+    console.log(word);
+    for(let i = 0; i < word.eng.length; i++){
+        createWordRowDOM(scrollToView, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
+    }
 }

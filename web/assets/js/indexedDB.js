@@ -16,7 +16,7 @@ if (!('indexedDB' in window)) {
 
 // Create needed variables
 const IDB = window.indexedDB,
-    IDBName = "words_list";
+    IDBName = "wordslistidb";
 var IDB_COUNT = -1;
 
 // get "words_list" object
@@ -85,8 +85,25 @@ function openWrdsIDB(){
 
 // Add a new word to the IDBObj
 async function addWrdtoIDB(db, obj){
-    let r = getWrdLstObj(db).add({rank: IDB_COUNT + 1, status: 0, ...obj});
+    let fObj = {rank: IDB_COUNT + 1, status: 0, ...obj};
+    let r = getWrdLstObj(db).add(fObj);
     // Keep track of the IDB_COUNT value!
     IDB_COUNT = await getWrdLstCnt(db);
-    return r;
+    return [r, fObj];
+}
+
+// Get all words from IDB
+function getAllWrdIDB(db){
+    // Return a promise
+    return new Promise((resolve) => {
+        const req = getWrdLstObj(db).getAll();
+        req.onsuccess = ()=> {
+            const wrds = req.result;
+            resolve(wrds);
+        }
+        req.onerror = (err)=> {
+            showPrompt("Something went wrong!", "We couldn't retrieve your data!",);
+            console.error(`Error to get all students: ${err}`)
+        }
+    });
 }
