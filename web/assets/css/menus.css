@@ -50,6 +50,20 @@
     border: 1px solid #babcc565;
 }
 
+.menu .option[cooldown] {
+    color: #e94055;
+}
+
+.menu .option[cooldown]:hover:not(.colours) {
+    background-color: #e940550e;
+    border: 1px solid #c4374765;
+}
+.menu .option[cooldown]:active:not(.colours) {
+    background-color: #e940553d;
+    border: 1px solid #c9334565;
+}
+
+
 .menu .option.colours {
     margin: auto;
     width: fit-content;

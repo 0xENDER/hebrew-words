@@ -34,7 +34,13 @@ window.onclick = function(e){
 window.onblur = hideContextMenus;
 
 // Hide all context menus
+let activeCooldownIntrvs = [];
 function hideContextMenus(){
+    // Clear active cooldown intervals
+    while(activeCooldownIntrvs.length != 0){
+        clearInterval(activeCooldownIntrvs.pop());
+    }
+    // Hide menus
     focusZone.style.display = "none";
     let elms = document.getElementsByClassName("menu");
     for(let elm of elms){
@@ -42,8 +48,36 @@ function hideContextMenus(){
     }
 }
 
+// Manage buttons cooldown
+const cooldownedButtons = document.querySelectorAll("[cooldown]");
+function activateCooldown(elm, i){
+    // Disable element
+    elm.setAttribute("disabled", "");
+    let text = elm.getAttribute("cooldown"),
+        tC = 3, t = -1;
+    elm.textContent = `${text} (${tC}s)`;
+    activeCooldownIntrvs.push(
+        t = setInterval(function(){
+            elm.textContent = `${text} (${--tC}s)`;
+            if(tC <= 0){
+                elm.removeAttribute("disabled", "");
+                elm.textContent = text;
+                clearInterval(t);
+            }
+        }, 1000)
+    );
+}
+function activateCooldownAll(){
+    for(let i = 0; i < cooldownedButtons.length; i++) {
+        activateCooldown(cooldownedButtons[i]);
+    }
+}
+
 // Show a context menu
 function showContextMenu(e, elm){
+    // Start countdown for buttons with "cooldown"
+    activateCooldownAll();
+    // Show context menu
     focusZone.style.display = null;
     elm.style.display = null;
     // Keep track of the saved elm
