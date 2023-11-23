@@ -40,6 +40,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     con.setAttribute("class",
         `row ${isOdd ? "odd" : "even"} ${rowStatus[status]}`);
     con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
+    con.setAttribute("tabindex", "0");
     // Add info
     rankElm.innerText = rank;
     engElm.innerText = english;
@@ -57,11 +58,15 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     }
     // Keep track of previousRank
     if(typeof rank == "number"){
-        con.rank = rank;
+        // Keep track of the number of meanings in a ranked word
+        if(previousRank != -1){
+            document.getElementById(previousRank).dataset.rankC = previousRankC;
+        }
+        con.dataset.rank = rank;
         previousRank = rank;
         previousRankC = 1;
     }else{
-        con.rank = previousRank;
+        con.dataset.rank = previousRank;
         previousRankC++;
     }
     // Delete used variables
