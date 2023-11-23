@@ -12,5 +12,9 @@ html, body {
 body {
     margin: 0px;
     background-color: #121213;
-    padding-bottom: calc(100vh - 47px - 8 * 42px);
+    padding: 0px 10px;
+    max-width: 1000px;
+    min-height: calc(100vh + 10px);
+    margin: auto;
+    padding-bottom: calc(100vh - 75px - 8 * 50px);
 }

@@ -15,13 +15,23 @@
     cursor: pointer;
 }
 
-.table .row td:nth-child(4) {
-    font-family: Narkisim, Times New Roman, Arial, serif;
+.table .row td {
+    padding: 12px;
 }
 
 .table .row td:nth-child(2) {
     width: 100%;
 }
+
+.table .row td:nth-child(3),
+.table .row td:nth-child(4) {
+    min-width: 120px;
+}
+
+.table .row td:nth-child(4) {
+    font-family: Narkisim, Times New Roman, Arial, serif;
+}
+
 
 .table td,
 .table th {
@@ -43,7 +53,7 @@
     left: 0px;
 }
 .table .head th {
-    padding: 10px 6px;
+    padding: 24px 6px;
     background-color: #121213;
 }
 
