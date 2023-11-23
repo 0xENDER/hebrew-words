@@ -3,3 +3,19 @@
  * Context menus styles
  *
 **/
+
+.menu {
+    display: block;
+    position: fixed;
+    background-color: blue;
+    height: fit-content;
+    width: 520px;
+}
+
+.menu .option {
+    display: block;
+    width: 100%;
+    height: 50px;
+    margin: 0px 5px;
+    background-color: red;
+}
