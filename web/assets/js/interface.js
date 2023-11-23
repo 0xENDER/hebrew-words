@@ -26,6 +26,7 @@ function showPrompt(title, message, ...args){
 //      <td class="alt3"> שלום </td>
 //  </tr>
 let previousRank = -1,
+    previousRankC = 1,
     rowStatus = ["", "yellow", "red", "green", "blue"];
 function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
     let con = document.createElement('tr'),
@@ -38,6 +39,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
                 (typeof rank == "string" && previousRank % 2);
     con.setAttribute("class",
         `row ${isOdd ? "odd" : "even"} ${rowStatus[status]}`);
+    con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
     // Add info
     rankElm.innerText = rank;
     engElm.innerText = english;
@@ -57,15 +59,16 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     if(typeof rank == "number"){
         con.rank = rank;
         previousRank = rank;
+        previousRankC = 1;
     }else{
         con.rank = previousRank;
+        previousRankC++;
     }
     // Delete used variables
     delete con, rankElm, engElm, translitElm, hebElm, isOdd;
 }
 
 async function createWordRows(word, scrollToView = true){
-    console.log(word);
     for(let i = 0; i < word.eng.length; i++){
         createWordRowDOM(scrollToView, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
     }
