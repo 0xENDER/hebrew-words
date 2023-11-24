@@ -43,7 +43,7 @@ async function exportWrdsLst(){
 function importWrdsLstFile(callback){
     importFile(async function(file){
         let wrdsLst = JSON.parse(file);
-        importWrdsLst(wrdsLst, callback);
+        await importWrdsLst(wrdsLst, callback);
         delete wrdsLst;
     }, "json");
 }

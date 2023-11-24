@@ -136,11 +136,13 @@ function clrAllWrdIDB(db){
     // Return a promise
     return new Promise((resolve) => {
         const req = getWrdLstObj(db).clear();
-        req.onsuccess = ()=> {
+        req.onsuccess = async () => {
+            IDB_COUNT = await getWrdLstCnt(db);
             resolve(true);
         }
-        req.onerror = (err)=> {
+        req.onerror = async (err) => {
             showPrompt("Something went wrong!", "We couldn't delete all your data!",);
+            IDB_COUNT = await getWrdLstCnt(db);
             resolve(false)
         }
     });
@@ -153,6 +155,7 @@ function dltWrdsIDB(){
     return new Promise((resolve) => {
         // Delete IDB
         const req = IDB.deleteDatabase(IDBName);
+        IDB_COUNT = -1;
         req.onsuccess = function () {
             resolve(0);
         };
@@ -172,10 +175,12 @@ function dltWrdRowIDB(db, obj){
     return new Promise((resolve) => {
         // Delete IDB
         const req = getWrdLstObj(db).delete(obj.rank);
-        req.onsuccess = function () {
+        req.onsuccess = async () => {
+            IDB_COUNT = await getWrdLstCnt(db);
             resolve(true);
         };
-        req.onerror = function () {
+        req.onerror = async () => {
+            IDB_COUNT = await getWrdLstCnt(db);
             resolve(false);
         };
     });

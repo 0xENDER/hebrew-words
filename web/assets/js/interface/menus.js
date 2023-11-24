@@ -131,7 +131,7 @@ resetListButton.onclick = function(){
                 // Stop list updates
                 terminateHeldListUpdates = true;
                 // Empty the list on screen!
-                let rows = document.getElementsByClassName("row");
+                let rows = document.getElementsByClassName("ranked-row");
                 while(rows.length > 0){
                     rows[0].remove();
                 }

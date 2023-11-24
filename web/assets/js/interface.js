@@ -18,14 +18,19 @@ let previousRank = -1,
     previousRankC = 1,
     rowStatus = ["grey", "yellow", "red", "green", "blue"];
 function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
+    // console.log(hebrew, typeof rank, rank);
+    // Reset previousRank on database reset!
+    if(typeof rank == "number" && previousRank >= rank){
+        previousRank = -1;
+        previousRankC = 1;
+    }
+    // Create elements
     let con = document.createElement('tr'),
         rankElm = document.createElement('td'),
         engElm = document.createElement('td'),
         translitElm = document.createElement('td'),
         hebElm = document.createElement('td');
     // Get row info
-    let isOdd = (typeof rank == "number" && rank % 2) ||
-                (typeof rank == "string" && previousRank % 2);
     con.setAttribute("class", `row ${rowStatus[status]}`);
     con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
     con.setAttribute("tabindex", "0");
@@ -42,7 +47,6 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     // Group the words in the same rank
     let tbody;
     if(typeof rank == "number"){
-        //
         tbody = document.createElement("tbody");
         tbody.id = "t-" + rank;
         tbody.classList.add("ranked-row");
@@ -69,7 +73,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
         previousRankC++;
     }
     // Delete used variables
-    delete con, rankElm, engElm, translitElm, hebElm, isOdd;
+    delete con, rankElm, engElm, translitElm, hebElm, tbody;
 }
 
 // Create word row
