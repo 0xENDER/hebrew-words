@@ -16,6 +16,7 @@ function toggleFilterOption(buttonElm, status){
     // Get new status
     let toggleStt = buttonElm.dataset.off == "true";
     buttonElm.dataset.off = (toggleStt) ? "" : "true";
+    // You need to take a more JS-oriented approach for proper even/odd row display!
     if(toggleStt){
         // On
         TABLE_ELM.classList.remove("hide-" + rowStatus[status]);
