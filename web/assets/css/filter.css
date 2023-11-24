@@ -30,6 +30,17 @@
     border-bottom: 6px solid transparent;
 }
 
+#filter_zone .filter-option text {
+    display: block;
+    position: absolute;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    font-weight: lighter;
+}
+
 #filter_zone .filter-option.grey {
     background-color: #2e2e35;
     border-color: #2e2e35;
