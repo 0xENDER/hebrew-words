@@ -50,11 +50,12 @@ function hideContextMenus(){
 
 // Manage buttons cooldown
 const cooldownedButtons = document.querySelectorAll("[cooldown]");
-function activateCooldown(elm, i){
+function activateCooldown(elm){
     // Disable element
     elm.setAttribute("disabled", "");
     let text = elm.getAttribute("cooldown"),
-        tC = 3, t = -1;
+        tC = Number(elm.getAttribute("cooldown-d")), t = -1;
+    tC = (tC != 0) ? tC : 30;
     elm.textContent = `${text} (${tC}s)`;
     activeCooldownIntrvs.push(
         t = setInterval(function(){
@@ -101,7 +102,6 @@ function getRankRows(rowElm, callback){
         if(l > 1){
             let rank = rowElm.dataset.rank;
             for (let i = 0; i < l - 1; i++){
-                console.log(`${rank}_${i + 1}`);
                 callback(document.getElementById(`${rank}_${i + 1}`));
             }
         }
