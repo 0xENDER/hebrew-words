@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./assets/css/dialog.css">
     <link rel="stylesheet" href="./assets/css/interactive.css">
     <link rel="stylesheet" href="./assets/css/input.css">
+    <link rel="stylesheet" href="./assets/css/filter.css">
     <link rel="stylesheet" href="./assets/css/animations.css">
 </head>
 
@@ -44,14 +45,13 @@
             <div id="remove-word-row" class="option no-context-menu" cooldown="Remove Word" cooldown-d="2" disabled>Remove Word</div>
         </div>
         <div id="menu_page" class="menu no-context-menu" style="display: none;">
-            <div class="option no-context-menu" disabled>Manage Filter</div>
             <div id="toggle-words-cover-enbglish" class="option no-context-menu">Toggle Words Cover (English)</div>
             <div id="import-export-list" class="option no-context-menu">Import/Export List</div>
             <div id="reset-list" class="option no-context-menu" cooldown="Reset List" cooldown-d="5" disabled>Reset List</div>
         </div>    
     </div>
     <div id="dialog_zone" class="no-context-menu" tabindex="-1" style="display: none;"></div>
-    <div id="input_zone" class="row-input-container no-context-menu" tabindex="-1" style="">
+    <div id="input_zone" class="row-input-container no-context-menu" tabindex="-1">
         <table class="table">
             <tbody class="ranked-row">
                 <tr class="row grey input-row" data-status="0" data-rank="0" data-rank-c="1">
@@ -71,6 +71,13 @@
             </tbody>
         </table>
     </div>
+    <div id="filter_zone" tabindex="-1">
+        <div id="filter-none" class="filter-option grey no-context-menu"></div>
+        <div id="filter-yellow" class="filter-option yellow no-context-menu"></div>
+        <div id="filter-red" class="filter-option red no-context-menu"></div>
+        <div id="filter-green" class="filter-option green no-context-menu"></div>
+        <div id="filter-blue" class="filter-option blue no-context-menu"></div>
+    </div>
     <script type="text/javascript" src="./data/list.js"></script>
     <script type="text/javascript" src="./assets/js/extra.js"></script>
     <script type="text/javascript" src="./assets/js/interface/menus.js"></script>
@@ -80,6 +87,7 @@
     <script type="text/javascript" src="./assets/js/data.js"></script>
     <script type="text/javascript" src="./assets/js/save.js"></script>
     <script type="text/javascript" src="./assets/js/interface/input.js"></script>
+    <script type="text/javascript" src="./assets/js/interface/filter.js"></script>
     <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>
 </html>

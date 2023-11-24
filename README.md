@@ -17,6 +17,7 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
     - [x] Add the ability to remove row
     - [x] Add the ability to copy Hebrew words
     - [x] Add the ability to read aloud Hebrew words
+- [ ] Add cards slideshow
 
 ## Notes
 

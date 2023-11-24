@@ -70,3 +70,7 @@
 .menu .colours .colour.selected::after {
     transition: background 0.1s ease-out;
 }
+
+#filter_zone .filter-option {
+    transition: background 0.05s ease-out;
+}

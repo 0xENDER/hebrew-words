@@ -130,3 +130,20 @@
 .table .ranked-row .row.blue:active {
     background-color: #284a70;
 }
+
+
+.hide-grey .ranked-row .row:not(.yellow):not(.red):not(.green):not(.blue){
+    display: none;
+}
+.hide-yellow .ranked-row .row.yellow{
+    display: none;
+}
+.hide-red .ranked-row .row.red {
+    display: none;
+}
+.hide-green .ranked-row .row.green {
+    display: none;
+}
+.hide-blue .ranked-row .row.blue {
+    display: none;
+}
