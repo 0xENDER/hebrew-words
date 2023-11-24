@@ -91,41 +91,12 @@ function showContextMenu(e, elm){
     }, 0);
 }
 
-
-// Get all rank rows
-function getRankRows(rowElm, callback){
-    if(rowElm.id.includes("_")){
-        getRankRows(document.getElementById(rowElm.dataset.rank), callback);
-    }else{
-        let l = Number(rowElm.dataset.rankC);
-        callback(rowElm);
-        if(l > 1){
-            let rank = rowElm.dataset.rank;
-            for (let i = 0; i < l - 1; i++){
-                callback(document.getElementById(`${rank}_${i + 1}`));
-            }
-        }
-    }
-}
-
 // Manage row status
 // MOVE THIS CODE TO INTERFACE.JS
 const redRowButton = document.getElementById("row-colour-red"),
     yellowRowButton = document.getElementById("row-colour-yellow"),
     greenRowButton = document.getElementById("row-colour-green"),
-    blueRowButton = document.getElementById("row-colour-blue"),
-    coloursList = ["none", "yellow", "red", "green", "blue"];
-function replaceRowColour(rowElm, status){
-    for (let c in coloursList){
-        rowElm.classList.remove(coloursList[c]);
-    }
-    rowElm.classList.add(coloursList[status]);
-}
-function replaceRowsColour(rowElm, status){
-    getRankRows(rowElm, function(row){
-        replaceRowColour(row, status);
-    });
-}
+    blueRowButton = document.getElementById("row-colour-blue");
 async function setRowColourStt(status){
     let rank = Number(rowCM.TARGET_ROW.dataset.rank)
     let r = await updateWrdIDB({rank, status});
@@ -170,11 +141,6 @@ resetListButton.onclick = function(){
 
 // Remove word from list
 const removeWordButton = document.getElementById("remove-word-row");
-function removeWordRowsFromList(rank){
-    getRankRows(document.getElementById(rank + ""), function(row){
-        row.remove();
-    });
-}
 removeWordButton.onclick = async function(){
     let rank = rowCM.TARGET_ROW.dataset.rank;
     let r = await deleteWrdFromIDB(rank);
@@ -184,3 +150,7 @@ removeWordButton.onclick = async function(){
         showPrompt("Error!", "We couldn't remove this word from your list!", ["Reload", () => window.location.reload()])
     }
 };
+
+// Add word to list
+const addWordButton = document.getElementById("add-word-row");
+addWordButton.onclick

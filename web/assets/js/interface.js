@@ -27,7 +27,7 @@ function showPrompt(title, message, ...args){
 //  </tr>
 let previousRank = -1,
     previousRankC = 1,
-    rowStatus = ["", "yellow", "red", "green", "blue"];
+    rowStatus = ["grey", "yellow", "red", "green", "blue"];
 function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
     let con = document.createElement('tr'),
         rankElm = document.createElement('td'),
@@ -73,8 +73,45 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     delete con, rankElm, engElm, translitElm, hebElm, isOdd;
 }
 
+// Create word row
 async function createWordRows(word, scrollToView = true){
     for(let i = 0; i < word.eng.length; i++){
         createWordRowDOM(scrollToView, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
     }
+}
+
+// Get all rank rows
+function getRankRows(rowElm, callback){
+    if(rowElm.id.includes("_")){
+        getRankRows(document.getElementById(rowElm.dataset.rank), callback);
+    }else{
+        let l = Number(rowElm.dataset.rankC);
+        callback(rowElm);
+        if(l > 1){
+            let rank = rowElm.dataset.rank;
+            for (let i = 0; i < l - 1; i++){
+                callback(document.getElementById(`${rank}_${i + 1}`));
+            }
+        }
+    }
+}
+
+// set row status
+function replaceRowColour(rowElm, status){
+    for (let c in rowStatus){
+        rowElm.classList.remove(rowStatus[c]);
+    }
+    rowElm.classList.add(rowStatus[status]);
+}
+function replaceRowsColour(rowElm, status){
+    getRankRows(rowElm, function(row){
+        replaceRowColour(row, status);
+    });
+}
+
+// Remove word from list
+function removeWordRowsFromList(rank){
+    getRankRows(document.getElementById(rank + ""), function(row){
+        row.remove();
+    });
 }
