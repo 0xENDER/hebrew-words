@@ -7,17 +7,6 @@
 // Get all the needed variables
 const TABLE_ELM = document.getElementById('words');
 
-// Show a prompt
-// Tmp code
-// Example:
-function showPrompt(title, message, ...args){
-    if(args.length == 0){
-        args = [["Ok", () => {}]];
-    }
-    alert(`${title}\n${message}`);
-    args[0][1]();
-}
-
 // Create a row for the list
 // <tr class="row odd">
 //      <td> 0 </td>
