@@ -129,3 +129,32 @@ yellowRowButton.onclick = () => setRowColourStt(1);
 redRowButton.onclick = () => setRowColourStt(2);
 greenRowButton.onclick = () => setRowColourStt(3);
 blueRowButton.onclick = () => setRowColourStt(4);
+
+// Reset list
+const resetListButton = document.getElementById("reset-list");
+resetListButton.onclick = function(){
+    showPrompt("Reset List", "Would you like to reset the list completely, or just empty it?",
+        ["Reset (Reload Required)", () => {
+            deleteWrdIDB(function(success, code){
+                if(success){
+                    window.location.reload();
+                }else{
+                    showPrompt("Reset Error!", `We couldn't reset your list! (${(code == 1) ? "Error" : "Blocked"})`,
+                        ["Reload List", () => window.location.reload()]);
+                }
+            });
+        }],
+        ["Empty", async () => {
+            let r = await removeAllWrdIDB();
+            if(r){
+                // Stop list updates
+                terminateHeldListUpdates = true;
+                // Empty the list on screen!
+                let rows = document.getElementsByClassName("row");
+                while(rows.length > 0){
+                    rows[0].remove();
+                }
+                delete rows;
+            }
+        }]);
+};

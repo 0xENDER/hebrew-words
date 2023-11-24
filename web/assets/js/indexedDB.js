@@ -51,9 +51,9 @@ function openWrdsIDB(){
             resolve(null);
         };
         // Keep track of the IDB_COUNT value!
-        async function done(r, db){
+        async function done(db){
             IDB_COUNT = await getWrdLstCnt(db);
-            resolve(r);
+            resolve(db);
         }
         // This event is only implemented in recent browsers
         req.onupgradeneeded = (event) => {
@@ -71,24 +71,27 @@ function openWrdsIDB(){
             // Wait for the end of obj creation
             objStore.transaction.oncomplete = (e) => {
                 // const wordsObjStore = getWrdLstObj(db)
-                done(db, db);
+                done(db);
             };
         };    
         // Return callback if the ready IDB if it doesn't need an upgrade
         req.onsuccess = function(e){
             const db = e.target.result;
-            done(db, db);
+            done(db);
         }
     });
 }
 
 // Add a new word to the IDBObj
+// Returns <Array> -> [IDBResponse, newly inserted JSON data, <Boolean> - change in rows number]
+let prvIDBCnt = -1;
 async function addWrdtoIDB(db, obj){
+    prvIDBCnt = IDB_COUNT;
     let fObj = {rank: IDB_COUNT + 1, status: 0, ...obj};
     let r = getWrdLstObj(db).add(fObj);
     // Keep track of the IDB_COUNT value!
     IDB_COUNT = await getWrdLstCnt(db);
-    return [r, fObj];
+    return [r, fObj, IDB_COUNT != prvIDBCnt];
 }
 
 // Update an existing word
@@ -125,5 +128,39 @@ function getAllWrdIDB(db){
             showPrompt("Something went wrong!", "We couldn't retrieve your data!",);
             throw err;
         }
+    });
+}
+
+// Clear all data from IDBObjectStore
+function clrAllWrdIDB(db){
+    // Return a promise
+    return new Promise((resolve) => {
+        const req = getWrdLstObj(db).clear();
+        req.onsuccess = ()=> {
+            resolve(true);
+        }
+        req.onerror = (err)=> {
+            showPrompt("Something went wrong!", "We couldn't delete all your data!",);
+            resolve(false)
+        }
+    });
+}
+
+// Delete IDB
+// 0 - success, 1 - error, 2 - blocked
+function dltWrdIDB(){
+    // Return a promise
+    return new Promise((resolve) => {
+        // Delete IDB
+        const req = IDB.deleteDatabase(IDBName);
+        req.onsuccess = function () {
+            resolve(0);
+        };
+        req.onerror = function () {
+            resolve(1);
+        };
+        req.onblocked = function () {
+            resolve(2);
+        };
     });
 }
