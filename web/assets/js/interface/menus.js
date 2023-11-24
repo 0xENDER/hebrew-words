@@ -170,3 +170,15 @@ const toggleWordsCoverEngButton = document.getElementById("toggle-words-cover-en
 toggleWordsCoverEngButton.onclick = function(){
     toggleWordsCoverEng();
 };
+
+// Read word
+const readWordRowButton = document.getElementById("read-word-row");
+readWordRowButton.onclick = function(){
+    readText(getRowPValue(rowCM.TARGET_ROW, 3));
+};
+
+// Copy word
+const copyWordRowButton = document.getElementById("copy-word-row");
+copyWordRowButton.onclick = function(){
+    copyText(getRowPValue(rowCM.TARGET_ROW, 3));
+};

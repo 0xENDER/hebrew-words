@@ -82,3 +82,20 @@ function importFile(callback, types = []){
     document.body.appendChild(input);
     input.click();
 }
+
+// Create a new SpeechSynthesisUtterance object
+let utterance = new SpeechSynthesisUtterance();
+// Set the text and voice of the utterance
+utterance.voice = window.speechSynthesis.getVoices()[0];
+utterance.lang = "he-IL";
+// Read aloud text
+function readText(str){
+    utterance.text = str;
+    // Speak the utterance
+    window.speechSynthesis.speak(utterance);
+}
+
+// Copy text
+function copyText(str){
+    navigator.clipboard.writeText(str);
+}

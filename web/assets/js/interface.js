@@ -126,3 +126,8 @@ function toggleWordsCoverEng() {
         document.body.dataset.coverEnglish = true;
     }
 }
+
+// Get text inside row
+function getRowPValue(rowElm, n){
+    return rowElm.parentElement.childNodes[0].childNodes[n].textContent;
+}
