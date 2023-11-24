@@ -37,8 +37,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     // Get row info
     let isOdd = (typeof rank == "number" && rank % 2) ||
                 (typeof rank == "string" && previousRank % 2);
-    con.setAttribute("class",
-        `row ${isOdd ? "odd" : "even"} ${rowStatus[status]}`);
+    con.setAttribute("class", `row ${rowStatus[status]}`);
     con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
     con.setAttribute("tabindex", "0");
     // Add info
@@ -51,8 +50,19 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     con.appendChild(engElm);
     con.appendChild(translitElm);
     con.appendChild(hebElm);
+    // Group the words in the same rank
+    let tbody;
+    if(typeof rank == "number"){
+        //
+        tbody = document.createElement("tbody");
+        tbody.id = "t-" + rank;
+        tbody.classList.add("ranked-row");
+        TABLE_ELM.appendChild(tbody);
+    }else{
+        tbody = document.getElementById("t-" + previousRank);
+    }
     // Append row to the list
-    TABLE_ELM.appendChild(con);
+    tbody.appendChild(con);
     if(scrollToView){
         con.scrollIntoView();
     }
@@ -111,7 +121,6 @@ function replaceRowsColour(rowElm, status){
 
 // Remove word from list
 function removeWordRowsFromList(rank){
-    getRankRows(document.getElementById(rank + ""), function(row){
-        row.remove();
-    });
+    let tbody = document.getElementById("t-" + rank)
+    tbody.remove();
 }
