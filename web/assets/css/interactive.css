@@ -43,3 +43,13 @@ button.primary:active {
     border: 1px solid #a9afc9bd;
     box-shadow: 0px 2px 5px 1px #babcc541;
 }
+
+input {
+    font-size: 0.85em;
+    font-weight: lighter;
+    width: fit-content;
+    max-width: 90%;
+    border: none;
+    background-color: transparent;
+
+}

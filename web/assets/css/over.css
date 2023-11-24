@@ -18,6 +18,7 @@ body {
     background-color: #121213;
     padding: 0px 10px;
     max-width: 1000px;
+    width: 100%;
     min-height: calc(100vh + 10px);
     margin: auto;
     padding-bottom: calc(100vh - 75px - 8 * 50px);

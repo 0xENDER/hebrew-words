@@ -19,9 +19,15 @@ window.oncontextmenu = function(e){
     // Get source element (element the cursor is within)
     let srcElm = e.srcElement;
     if(![...srcElm.classList].includes("no-context-menu")){
-        if(srcElm.tagName == "TD"){
+        if(srcElm.tagName == "TD" || srcElm.hasAttribute("row-menu")){
+            // Fix target
+            if(srcElm.hasAttribute("row-menu")){
+                e = {...e, srcElement: srcElm.parentElement, y: e.y, x: e.x};
+            }
+            console.log(e.srcElement);
             showContextMenu(e, rowCM);
             updateContextMenuColour();
+            updateRowContextMenuMode();
         }else{
             showContextMenu(e, pageCM);
         }
@@ -107,6 +113,19 @@ function updateContextMenuColour(){
     }
 }
 
+// Update the shown elements inside context menu (for input mode)
+function updateRowContextMenuMode(){
+    if(Number(rowCM.TARGET_ROW.dataset.rank) != 0){
+        removeWordButton.style.display = null;
+        readWordRowButton.style.display = null;
+        copyWordRowButton.style.display = null;
+    }else{
+        removeWordButton.style.display = "none";
+        readWordRowButton.style.display = "none";
+        copyWordRowButton.style.display = "none";
+    }
+}
+
 // Manage row status
 // MOVE THIS CODE TO INTERFACE.JS
 const redRowButton = document.getElementById("row-colour-red"),
@@ -121,7 +140,14 @@ async function setRowColourStt(elm, status){
         status = 0;
     }
     let rank = Number(rowCM.TARGET_ROW.dataset.rank)
-    let r = await updateWrdIDB({rank, status});
+    // Exclude the input row!
+    let r;
+    if(rank != 0){
+        r = await updateWrdIDB({rank, status});
+    }else{
+        r = true;
+    }
+    // Update row colour on screen
     if(r != null){
         replaceRowsColour(rowCM.TARGET_ROW, status);
     }
@@ -152,7 +178,7 @@ resetListButton.onclick = function(){
                 // Stop list updates
                 terminateHeldListUpdates = true;
                 // Empty the list on screen!
-                let rows = document.getElementsByClassName("ranked-row");
+                let rows = TABLE_ELM.getElementsByClassName("ranked-row");
                 while(rows.length > 0){
                     rows[0].remove();
                 }
@@ -171,12 +197,6 @@ removeWordButton.onclick = async function(){
     }else{
         showPrompt("Error!", "We couldn't remove this word from your list!", ["Reload", () => window.location.reload()])
     }
-};
-
-// Add word to list
-const addWordButton = document.getElementById("add-word-row");
-addWordButton.onclick = function(){
-    alert("Not ready!")
 };
 
 // Import/Export list
