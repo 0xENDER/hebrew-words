@@ -67,22 +67,22 @@
     background-color: #1f1f24;
 }
 
-.table .row:hover,
-.table .row:focus,
-.table .row:active {
+.table .ranked-row .row:hover,
+.table .ranked-row .row:focus,
+.table .ranked-row .row:active {
     background-color: #32323b;
 }
 
-.table .ranked-row:nth-child(even) .row.red {
+.table > .ranked-row:nth-child(even) .row.red {
     background-color: #5e131c;
 }
 .table .ranked-row:nth-child(odd) .row.red {
     background-color: #642029;
 }
 
-.table .row.red:hover,
-.table .row.red:focus,
-.table .row.red:active {
+.table .ranked-row .row.red:hover,
+.table .ranked-row .row.red:focus,
+.table .ranked-row .row.red:active {
     background-color: #7c3740;
 }
 
@@ -93,9 +93,9 @@
     background-color: #79672d;
 }
 
-.table .row.yellow:hover,
-.table .row.yellow:focus,
-.table .row.yellow:active {
+.table .ranked-row .row.yellow:hover,
+.table .ranked-row .row.yellow:focus,
+.table .ranked-row .row.yellow:active {
     background-color: #8f7d44;
 }
 
@@ -106,9 +106,9 @@
     background-color: #0d4929;
 }
 
-.table .row.green:hover,
-.table .row.green:focus,
-.table .row.green:active {
+.table .ranked-row .row.green:hover,
+.table .ranked-row .row.green:focus,
+.table .ranked-row .row.green:active {
     background-color: #1f613d;
 }
 
@@ -119,8 +119,8 @@
     background-color: #173558;
 }
 
-.table .row.blue:hover,
-.table .row.blue:focus,
-.table .row.blue:active {
+.table .ranked-row .row.blue:hover,
+.table .ranked-row .row.blue:focus,
+.table .ranked-row .row.blue:active {
     background-color: #284a70;
 }
