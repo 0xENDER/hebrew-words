@@ -164,3 +164,9 @@ importExportListButton.onclick = function(){
     showPrompt("Export/Import list!", "Note that newly imported lists will be combined with your current list!",
         ["Export", exportWrdsLst, true], ["Import", () => importWrdsLstFile(createWordRows), true], ["Cancel", () => {}, false]);
 };
+
+// Toggle words cover (English)
+const toggleWordsCoverEngButton = document.getElementById("toggle-words-cover-enbglish");
+toggleWordsCoverEngButton.onclick = function(){
+    toggleWordsCoverEng();
+};

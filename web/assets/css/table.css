@@ -26,6 +26,10 @@
     width: 100%;
 }
 
+[data-cover-english=true] .table .row td:nth-child(2) {
+    color: transparent;
+}
+
 .table .row td:nth-child(3),
 .table .row td:nth-child(4) {
     min-width: 120px;

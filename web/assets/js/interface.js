@@ -117,3 +117,12 @@ function removeWordRowsFromList(rank){
     let tbody = document.getElementById("t-" + rank)
     tbody.remove();
 }
+
+// Toggle English words cover status
+function toggleWordsCoverEng() {
+    if(document.body.dataset.coverEnglish){
+        document.body.dataset.coverEnglish = "";
+    }else{
+        document.body.dataset.coverEnglish = true;
+    }
+}

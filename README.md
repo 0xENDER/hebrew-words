@@ -7,7 +7,7 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
 - [ ] Add custom context menu pop-up
     - [ ] Add filtering
     - [ ] Add the ability to add individual words
-    - [ ] Add English words 'cover'
+    - [x] Add English words 'cover'
     - [x] Add an export/import option
     - [x] Add a reset option
     - [x] Add the option to add a word individually
