@@ -52,7 +52,6 @@ async function removeAllWrdIDB(){
 // Delete the IndexedDB
 async function deleteWrdIDB(callback) {
     const r = await dltWrdIDB();
-    alert(r);
     if(r == 0){
         callback(true, null);
     }else{
