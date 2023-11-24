@@ -86,7 +86,8 @@ function showContextMenu(e, elm){
     // Change the position of the context menu
     setTimeout(() => {
         let x = (e.x + elm.clientWidth < window.innerWidth) ? e.x : e.x - elm.clientWidth;
-        elm.style.top = e.y + "px";
+        let y = (e.y + elm.clientHeight < window.innerHeight) ? e.y : e.y - elm.clientHeight;
+        elm.style.top = y + "px";
         elm.style.left = x + "px";
     }, 0);
 }
