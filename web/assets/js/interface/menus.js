@@ -161,5 +161,5 @@ addWordButton.onclick = function(){
 const importExportListButton = document.getElementById("import-export-list");
 importExportListButton.onclick = function(){
     showPrompt("Export/Import list!", "Note that newly imported lists will be combined with your current list!",
-        ["Export", () => {}, true], ["Import", () => {}, true], ["Cancel", () => {}, false]);
+        ["Export", exportWrdsLst, true], ["Import", () => importWrdsLstFile(createWordRows), true], ["Cancel", () => {}, false]);
 };

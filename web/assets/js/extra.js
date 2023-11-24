@@ -24,3 +24,61 @@ const renderBlock = () => {
         window.onscroll();
     });
 };
+
+// Prompt file download
+function download(str, name){
+    let file = new File([str], name);
+    // Create a link and set the URL using `createObjectURL`
+    const link = document.createElement('a');
+    link.style.display = 'none';
+    link.href = URL.createObjectURL(file);
+    link.download = file.name;
+
+    // It needs to be added to the DOM so it can be clicked
+    document.body.appendChild(link);
+    link.click();
+
+    // To make this work on Firefox we need to wait
+    // a little while before removing it.
+    setTimeout(() => {
+        URL.revokeObjectURL(link.href);
+        link.parentNode.removeChild(link);
+    }, 0);
+}
+function downloadJSON(json, name){
+    let str = JSON.stringify(json);
+    return download(str, name + ".json");
+}
+
+// Import a file
+function importFile(callback, types = []){
+    // Create file input element
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.style.display = "none";
+    // Set file types
+    if(typeof types == "object" || typeof types == "string"){
+        input.accept = types.toString();
+    }
+    input.onchange = (e) => { 
+        // getting a hold of the file reference
+        var file = e.target.files[0]; 
+        // setting up the reader
+        var reader = new FileReader();
+        reader.readAsText(file,'UTF-8');
+
+        // here we tell the reader what to do when it's done reading...
+        reader.onload = readerEvent => {
+            const content = readerEvent.target.result;
+            // Remove element
+            setTimeout(() => {
+                input.remove();
+            }, 0);
+
+            callback(content);
+        }
+    };
+    // It needs to be added to the DOM so it can be clicked
+    document.body.appendChild(input);
+    input.click();
+}

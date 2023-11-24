@@ -10,7 +10,7 @@ checkWrdsIDB().then(function(r){
         // Prompt the user for options!
         showPrompt("Hello!", "Looks like you're new here!",
             ["Start", initFirstVisit],
-            ["Import Data", initFirstImport]
+            ["Import Data", initImport]
         );
     }else{
         // Load the data from the IDB
@@ -20,10 +20,12 @@ checkWrdsIDB().then(function(r){
 
 // Initiation functions
 function initFirstVisit(){
-    importWrdsLst(getDefaultList(), createWordRows);
+    let defaultList = getDefaultList();
+    importWrdsLst(defaultList, createWordRows);
+    delete defaultList;
 }
-function initFirstImport(){
-    showPrompt("Import Data Error!", "Oops! This option is not available yet!",);
+function initImport(){
+    importWrdsLstFile(createWordRows);
 }
 function initNormalVisit(){
     getWrdsIDB(createWordRows);

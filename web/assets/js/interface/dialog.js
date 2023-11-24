@@ -21,7 +21,6 @@ function addDialogButton(inp){
     buttonElm.textContent = inp[0]
     buttonElm.onclick = function(){
         let dialogId = buttonElm.parentElement.dataset.dialogId;
-        console.log(buttonElm, dialogId);
         closeDialog(dialogId);
         inp[1]();
     };
