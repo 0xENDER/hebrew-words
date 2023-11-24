@@ -26,19 +26,14 @@ async function importWrdsLst(wrdsLstObj, callback){
     db.close();
 }
 
-// Filter out data from JSON object
-function removeKeyFromJSON(obj, key){
-    for (let i = 0; i < obj.length; i++){
-        delete obj[i][key];
-    }
-}
-
 // Export IDB list
 async function exportWrdsLst(){
     const db = await openWrdsIDB();
-    const list = await getAllWrdIDB(db);
+    let list = await getAllWrdIDB(db);
     // Remove "rank" value
-    removeKeyFromJSON(list);
+    for (let i = 0; i < list.length; i++){
+        delete list[i]["rank"];
+    }
     //Download list
     downloadJSON(list, "WORDS_LIST_EXPORT");
     db.close();
