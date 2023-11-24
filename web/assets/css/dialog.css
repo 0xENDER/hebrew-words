@@ -3,3 +3,58 @@
  * Dialog styles
  *
 **/
+
+#dialog_zone {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    background-color: #3b3b4415;
+}
+
+.dialog {
+    display: block;
+    min-width: min(calc(100vw - 50px), 480px);
+    max-width: calc(100vw - 100px);
+    min-height: min(calc(100vh - 80px), 200px);
+    max-height: calc(100vh - 200px);
+    height: fit-content;
+    width: fit-content;
+    padding: 28px;
+    background-color: #171718;
+    border: 1px solid #6767691f;
+    box-shadow: 0px 6px 14px 4px #121214;
+    border-radius: 12px;
+}
+.dialog .title{
+    display: block;
+    margin: 10px auto;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.dialog .description{
+    display: block;
+    margin: 18px auto;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.dialog .buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    padding: 20px;
+    height: fit-content;
+    width: calc(100% - 2 * 20px);
+}

@@ -153,4 +153,13 @@ removeWordButton.onclick = async function(){
 
 // Add word to list
 const addWordButton = document.getElementById("add-word-row");
-addWordButton.onclick
+addWordButton.onclick = function(){
+    alert("Not ready!")
+};
+
+// Import/Export list
+const importExportListButton = document.getElementById("import-export-list");
+importExportListButton.onclick = function(){
+    showPrompt("Export/Import list!", "Note that newly imported lists will be combined with your current list!",
+        ["Export", () => {}, true], ["Import", () => {}, true], ["Cancel", () => {}, false]);
+};
