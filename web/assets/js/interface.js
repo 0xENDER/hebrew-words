@@ -32,6 +32,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
         hebElm = document.createElement('td');
     // Get row info
     con.setAttribute("class", `row ${rowStatus[status]}`);
+    con.dataset.status = status;
     con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
     con.setAttribute("tabindex", "0");
     // Add info
@@ -104,6 +105,7 @@ function replaceRowColour(rowElm, status){
     for (let c in rowStatus){
         rowElm.classList.remove(rowStatus[c]);
     }
+    rowElm.dataset.status = status;
     rowElm.classList.add(rowStatus[status]);
 }
 function replaceRowsColour(rowElm, status){
