@@ -7,8 +7,8 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
 - [ ] Add custom context menu pop-up
     - [ ] Add filtering
     - [ ] Add an export/import option
-    - [ ] Add a reset option
-    - [ ] Add the option to add a word individually
+    - [X] Add a reset option
+    - [X] Add the option to add a word individually
 - [x] Add a custom pop-up for option status selection
 
 ## Notes
