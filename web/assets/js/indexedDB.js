@@ -146,9 +146,9 @@ function clrAllWrdIDB(db){
     });
 }
 
-// Delete IDB
+// Delete words IDB
 // 0 - success, 1 - error, 2 - blocked
-function dltWrdIDB(){
+function dltWrdsIDB(){
     // Return a promise
     return new Promise((resolve) => {
         // Delete IDB
@@ -161,6 +161,22 @@ function dltWrdIDB(){
         };
         req.onblocked = function () {
             resolve(2);
+        };
+    });
+}
+
+// Delete word from IDB
+// 0 - success, 1 - error, 2 - blocked
+function dltWrdRowIDB(db, obj){
+    // Return a promise
+    return new Promise((resolve) => {
+        // Delete IDB
+        const req = getWrdLstObj(db).delete(obj.rank);
+        req.onsuccess = function () {
+            resolve(true);
+        };
+        req.onerror = function () {
+            resolve(false);
         };
     });
 }

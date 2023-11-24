@@ -50,11 +50,20 @@ async function removeAllWrdIDB(){
 }
 
 // Delete the IndexedDB
-async function deleteWrdIDB(callback) {
-    const r = await dltWrdIDB();
+async function deleteWrdsIDB(callback) {
+    const r = await dltWrdsIDB();
     if(r == 0){
         callback(true, null);
     }else{
         callback(false, r);
     }
+}
+
+// Delete a word from IndexedDB
+// Input: JSON Object | <Number> (rank)
+async function deleteWrdFromIDB(inp){
+    const db = await openWrdsIDB();
+    const r =  dltWrdRowIDB(db, (typeof inp == "object") ? inp : {rank: Number(inp)});
+    db.close();
+    return r;
 }

@@ -90,6 +90,24 @@ function showContextMenu(e, elm){
     }, 0);
 }
 
+
+// Get all rank rows
+function getRankRows(rowElm, callback){
+    if(rowElm.id.includes("_")){
+        getRankRows(document.getElementById(rowElm.dataset.rank), callback);
+    }else{
+        let l = Number(rowElm.dataset.rankC);
+        callback(rowElm);
+        if(l > 1){
+            let rank = rowElm.dataset.rank;
+            for (let i = 0; i < l - 1; i++){
+                console.log(`${rank}_${i + 1}`);
+                callback(document.getElementById(`${rank}_${i + 1}`));
+            }
+        }
+    }
+}
+
 // Manage row status
 // MOVE THIS CODE TO INTERFACE.JS
 const redRowButton = document.getElementById("row-colour-red"),
@@ -104,19 +122,9 @@ function replaceRowColour(rowElm, status){
     rowElm.classList.add(coloursList[status]);
 }
 function replaceRowsColour(rowElm, status){
-    if(rowElm.id.includes("_")){
-        replaceRowsColour(document.getElementById(rowElm.dataset.rank), status);
-    }else{
-        let l = Number(rowElm.dataset.rankC);
-        replaceRowColour(rowElm, status);
-        if(l > 1){
-            let rank = rowElm.dataset.rank;
-            for (let i = 0; i < l - 1; i++){
-                console.log(`${rank}_${i + 1}`);
-                replaceRowColour(document.getElementById(`${rank}_${i + 1}`), status);
-            }
-        }
-    }
+    getRankRows(rowElm, function(row){
+        replaceRowColour(row, status);
+    });
 }
 async function setRowColourStt(status){
     let rank = Number(rowCM.TARGET_ROW.dataset.rank)
@@ -135,7 +143,7 @@ const resetListButton = document.getElementById("reset-list");
 resetListButton.onclick = function(){
     showPrompt("Reset List", "Would you like to reset the list completely, or just empty it?",
         ["Reset (Reload Required)", () => {
-            deleteWrdIDB(function(success, code){
+            deleteWrdsIDB(function(success, code){
                 // For now, treat the `blocked` response as successful!
                 if(success || code == 2){ // Dunno why dis keeps happening <(._.)>
                     window.location.reload();
@@ -158,4 +166,21 @@ resetListButton.onclick = function(){
                 delete rows;
             }
         }]);
+};
+
+// Remove word from list
+const removeWordButton = document.getElementById("remove-word-row");
+function removeWordRowsFromList(rank){
+    getRankRows(document.getElementById(rank + ""), function(row){
+        row.remove();
+    });
+}
+removeWordButton.onclick = async function(){
+    let rank = rowCM.TARGET_ROW.dataset.rank;
+    let r = await deleteWrdFromIDB(rank);
+    if(r){
+        removeWordRowsFromList(rank);
+    }else{
+        showPrompt("Error!", "We couldn't remove this word from your list!", ["Reload", () => window.location.reload()])
+    }
 };
