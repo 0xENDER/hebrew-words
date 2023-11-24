@@ -21,6 +21,7 @@ window.oncontextmenu = function(e){
     if(![...srcElm.classList].includes("no-context-menu")){
         if(srcElm.tagName == "TD"){
             showContextMenu(e, rowCM);
+            updateContextMenuColour();
         }else{
             showContextMenu(e, pageCM);
         }
@@ -92,23 +93,43 @@ function showContextMenu(e, elm){
     }, 0);
 }
 
+// Update context menu colour selector
+const rowContextMenuColoursCon = document.getElementById("row-colour-container");
+function updateContextMenuColour(){
+    // Remove previous selection
+    for(let i = 0; i < rowContextMenuColoursCon.children.length; i++){
+        rowContextMenuColoursCon.children[i].classList.remove("selected");
+    }
+    //Add current selection
+    let n = Number(rowCM.TARGET_ROW.dataset.status);
+    if(n != 0){
+        rowContextMenuColoursCon.children[n - 1].classList.add("selected");
+    }
+}
+
 // Manage row status
 // MOVE THIS CODE TO INTERFACE.JS
 const redRowButton = document.getElementById("row-colour-red"),
     yellowRowButton = document.getElementById("row-colour-yellow"),
     greenRowButton = document.getElementById("row-colour-green"),
     blueRowButton = document.getElementById("row-colour-blue");
-async function setRowColourStt(status){
+function isColourAlreadySelected(elm){
+    return elm.classList.contains("selected");
+}
+async function setRowColourStt(elm, status){
+    if(isColourAlreadySelected(elm)){
+        status = 0;
+    }
     let rank = Number(rowCM.TARGET_ROW.dataset.rank)
     let r = await updateWrdIDB({rank, status});
     if(r != null){
         replaceRowsColour(rowCM.TARGET_ROW, status);
     }
 }
-yellowRowButton.onclick = () => setRowColourStt(1);
-redRowButton.onclick = () => setRowColourStt(2);
-greenRowButton.onclick = () => setRowColourStt(3);
-blueRowButton.onclick = () => setRowColourStt(4);
+yellowRowButton.onclick = () => setRowColourStt(yellowRowButton, 1);
+redRowButton.onclick = () => setRowColourStt(redRowButton, 2);
+greenRowButton.onclick = () => setRowColourStt(greenRowButton, 3);
+blueRowButton.onclick = () => setRowColourStt(blueRowButton, 4);
 
 // Reset list
 const resetListButton = document.getElementById("reset-list");

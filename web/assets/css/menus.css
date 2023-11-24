@@ -72,6 +72,7 @@
 }
 
 .menu .colours .colour {
+    position: relative;
     display: inline-block;
     width: 36px;
     height: 36px;
@@ -97,4 +98,24 @@
 
 .menu .colours .colour.blue {
     background-color: #2b5d96;
+}
+
+.menu .colours .colour.selected::after {
+    content: "✔";
+    position: absolute;
+    background-color: #171718cc;
+    padding: 5px;
+    top: -5px;
+    right: -5px;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    text-align: center;
+    line-height: 2em;
+    color: #dadae7;
+}
+
+.menu .colours .colour.selected:hover::after {
+    content: "✘";
+    background-color: #171718e7;
 }
