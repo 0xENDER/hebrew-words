@@ -45,27 +45,28 @@
             <div id="remove-word-row" class="option no-context-menu" cooldown="Remove Word" cooldown-d="2" disabled>Remove Word</div>
         </div>
         <div id="menu_page" class="menu no-context-menu" style="display: none;">
+            <div id="toggle-input-colour-reset" class="option no-context-menu">Toggle Colour Reset (Input)</div>
             <div id="toggle-words-cover-enbglish" class="option no-context-menu">Toggle Words Cover (English)</div>
             <div id="import-export-list" class="option no-context-menu">Import/Export List</div>
             <div id="reset-list" class="option no-context-menu" cooldown="Reset List" cooldown-d="5" disabled>Reset List</div>
         </div>    
     </div>
     <div id="dialog_zone" class="no-context-menu" tabindex="-1" style="display: none;"></div>
-    <div id="input_zone" class="row-input-container no-context-menu" tabindex="-1" disabled>
+    <div id="input_zone" class="row-input-container no-context-menu" tabindex="-1">
         <table class="table">
             <tbody class="ranked-row">
-                <tr class="row grey input-row" data-status="0" data-rank="0" data-rank-c="1">
+                <tr id="row-input-container" class="row grey input-row" data-status="0" data-rank="0" data-rank-c="1" data-reset="">
                     <td>
-                        <input class="word-input" row-menu type="text" placeholder="auto" />
+                        <input id="row-input-rank" class="word-input" row-menu type="text" placeholder="auto" tabindex="-1"/>
                     </td>
                     <td>
-                        <input class="word-input" row-menu type="text" placeholder="What does it mean?" />
+                        <input id="row-input-english" class="word-input" row-menu type="text" placeholder="What does it mean?" tabindex="1" />
                     </td>
                     <td>
-                        <input class="word-input" row-menu type="text" placeholder="khai" />
+                        <input id="row-input-transliteration" class="word-input" row-menu type="text" placeholder="khai" tabindex="1" />
                     </td>
                     <td>
-                        <input class="word-input" row-menu type="text" placeholder="חי" />
+                        <input id="row-input-hebrew" class="word-input" row-menu type="text" placeholder="חי" tabindex="1" />
                     </td>
                 </tr>
             </tbody>

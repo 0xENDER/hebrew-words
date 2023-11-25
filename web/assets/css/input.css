@@ -13,12 +13,6 @@
 
 #input_zone .ranked-row .input-row {
     border-top: 1px solid #c7c9d1;
-    background: none;
-    backdrop-filter: blur(8px);
-}
-
-.input-row td {
-    background-color: #1f1f24e3;
 }
 
 .input-row td:nth-child(1) {
@@ -47,4 +41,11 @@
 }
 .word-input:focus::placeholder{
     color: transparent;
+}
+
+#row-input-container[data-input=off] .word-input {
+    display: inline-block;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.4;
 }

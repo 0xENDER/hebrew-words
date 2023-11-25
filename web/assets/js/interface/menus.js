@@ -222,3 +222,14 @@ const copyWordRowButton = document.getElementById("copy-word-row");
 copyWordRowButton.onclick = function(){
     copyText(getRowPValue(rowCM.TARGET_ROW, 3));
 };
+
+// Toggle Input colour reset
+const toggleInputColourResetButton = document.getElementById("toggle-input-colour-reset");
+toggleInputColourResetButton.onclick = function(){
+    let n = Number(rowInputContainerElm.dataset.reset);
+    if(n == 0){
+        rowInputContainerElm.dataset.reset = "off";
+    }else{
+        rowInputContainerElm.dataset.reset = "";
+    }
+};

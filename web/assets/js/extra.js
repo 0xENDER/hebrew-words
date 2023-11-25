@@ -119,3 +119,25 @@ window.dispatchCustomEvent = function(event, ...args){
         customEventList[event][i](...args);
     }
 };
+
+// Filter all but numbers (no dots allowed)
+function filterKOnlyNumbers(str){
+    let all = str.split("");
+    for(let i = 0; i < all.length; i++){
+        if(isNaN(Number(all[i])) || all[i] == ' '){
+            all[i] = '';
+        }
+    }
+    let r = all.join('');
+    delete all;
+    return r;
+}
+
+// Trim the content of an array
+function trimArray(array){
+    let r = [];
+    for(let i = 0; i < array.length; i++){
+        r.push(array[i].trim())
+    }
+    return r;
+}

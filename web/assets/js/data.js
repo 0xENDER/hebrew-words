@@ -31,6 +31,14 @@ async function updWrdStt(rnk){
     //store.put
 }
 
+// Add a new word
+async function addWordIDB(obj){
+    const db = await openWrdsIDB();
+    const r = await addWrdtoIDB(db, obj);
+    db.close();
+    return r;
+}
+
 // Update an existing word
 // Returns [response, newData]
 // On error, returns null

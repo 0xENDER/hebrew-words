@@ -17,7 +17,7 @@ const TABLE_ELM = document.getElementById('words');
 let previousRank = -1,
     previousRankC = 1,
     rowStatus = ["grey", "yellow", "red", "green", "blue"];
-function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
+function createWordRowDOM(scrollToView, smoothScroll, hebrew, transliteration, english, status, rank = ""){
     // Reset previousRank on database reset!
     if(typeof rank == "number" && previousRank >= rank){
         previousRank = -1;
@@ -33,7 +33,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     con.setAttribute("class", `row ${rowStatus[status]}`);
     con.dataset.status = status;
     con.setAttribute("id", (typeof rank == "number") ? rank : `${previousRank}_${previousRankC}`)
-    con.setAttribute("tabindex", "0");
+    con.setAttribute("tabindex", "-1");
     // Add info
     rankElm.innerText = rank;
     engElm.innerText = english;
@@ -57,7 +57,7 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
     // Append row to the list
     tbody.appendChild(con);
     if(scrollToView){
-        con.scrollIntoView();
+        con.scrollIntoView({behavior: (smoothScroll) ? "smooth" : "instant"});
     }
     // Keep track of previousRank
     if(typeof rank == "number"){
@@ -77,9 +77,9 @@ function createWordRowDOM(scrollToView, hebrew, transliteration, english, status
 }
 
 // Create word row
-async function createWordRows(word, scrollToView = true){
+async function createWordRows(word, scrollToView = true, smoothScroll = false){
     for(let i = 0; i < word.eng.length; i++){
-        createWordRowDOM(scrollToView, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
+        createWordRowDOM(scrollToView, smoothScroll, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
     }
 }
 
