@@ -20,9 +20,22 @@ checkWrdsIDB().then(function(r){
 
 // Initiation functions
 function initFirstVisit(){
-    let defaultList = getDefaultList();
-    importWrdsLst(defaultList, createWordRows);
-    delete defaultList;
+    function wrds(n){
+        let defaultList = getDefaultList(),
+            newList;
+        newList = defaultList.slice(0, n);
+        importWrdsLst(newList, createWordRows);
+        delete defaultList, newList;
+    }
+    showPrompt("Default List Import",
+        "We are going to import a list Hebrew words that are ranked according to the feaquency of their use in written text. Please choose your threshold!",
+        ["790 words (~1 Month)", () => wrds(790)],
+        ["1,580 words (~2 Months)", () => wrds(1580)],
+        ["2,370 words (~3 Months)", () => wrds(2370)],
+        ["3,160 words (~4 Months)", () => wrds(3160)],
+        ["3,555 words (~4.5 Months)", () => wrds(3555)],
+        ["4,740 words (~6 Months)", () => wrds(4740)],
+        ["10,000 words (~12.5 Months)", () => wrds(10000)]);
 }
 function initImport(){
     importWrdsLstFile(createWordRows);

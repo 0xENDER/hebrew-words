@@ -164,7 +164,9 @@ resetListButton.onclick = function(){
             deleteWrdsIDB(function(success, code){
                 // For now, treat the `blocked` response as successful!
                 if(success || code == 2){ // Dunno why dis keeps happening <(._.)>
-                    window.location.reload();
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 100);
                 }else{
                     showPrompt("Reset Error!", `We couldn't reset your list! (${(code == 1) ? "Error" : "Blocked"})`,
                         ["Reload List", () => window.location.reload()]);
