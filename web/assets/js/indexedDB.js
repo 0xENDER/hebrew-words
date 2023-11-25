@@ -49,6 +49,17 @@ function getWrdLstSttCnt(db, obj){
     });
 }
 
+// Get the row with the highest rank
+function getHghWrdRnk(db){
+    return new Promise((resolve) => {
+        const index = getWrdLstObj(db).index("rank");
+        const openCursorRequest = index.openCursor(null, 'prev');
+        openCursorRequest.onsuccess = (e) => {
+            resolve(e.target.result.value);
+        };
+    });
+}
+
 // Open a database
 // Returns <IDBObjectStore> read to hold the user's data
 function openWrdsIDB(){

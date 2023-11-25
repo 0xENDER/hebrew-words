@@ -50,8 +50,15 @@ function inputNotEmpty(){
         rowInputHebrewElm.value != "");
 }
 
+// Get next rank
+async function getInputIDBRank(){
+    // You can write a better code that can guess a proper reasonable rank
+    const r =  await getHighestRankIDB();
+    return r.rank + 1;
+}
+
 // Create word object from input data
-function createWordObj(){
+async function createWordObj(){
     // Get input!
     let input = [
         Number(rowInputRankElm.value),
@@ -63,6 +70,8 @@ function createWordObj(){
     // Create word object
     if(input[0] != 0){
         word.rank = input[0];
+    }else{
+        word.rank = await getInputIDBRank();
     }
     word.eng = input[1];
     word.hb = input[3];
@@ -80,12 +89,12 @@ function resetInputRowStt(){
 }
 
 // Detect when the user uses the "enter" button
-window.onkeydown = function(e){
+window.onkeydown = async function(e){
     if(e.key == 'Enter' && !e.shiftKey && inputNotEmpty()){
         // Wait a bit to make sure the input has been fitlered
         setTimeout(async () => {
             // Create word object
-            let word = createWordObj();
+            let word = await createWordObj();
 
             // Add data to IDB
             let r = await addWordIDB(word);

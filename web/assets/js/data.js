@@ -87,3 +87,11 @@ async function updateWrdSttCntIDB(){
         await getWrdLstSttCnt(db, {status: 4})
     ];
 }
+
+// Get the highest rank value
+async function getHighestRankIDB(){
+    const db = await openWrdsIDB();
+    const r = await getHghWrdRnk(db);
+    db.close();
+    return r;
+}
