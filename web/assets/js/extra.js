@@ -99,3 +99,23 @@ function readText(str){
 function copyText(str){
     navigator.clipboard.writeText(str);
 }
+
+// Create custom event hanlder
+const customEventList = {};
+window.addCustomEventListener = function(event, callback){
+    // Add event (if new)
+    if(customEventList[event] == undefined){
+        customEventList[event] = [];
+    }
+    // Add callback
+    customEventList[event].push(callback);
+};
+
+// Fire custom event
+// Input: Event name(<Srring>), ... (<Any> - callback input)
+window.dispatchCustomEvent = function(event, ...args){
+    // Execute callbacks
+    for(let i = 0; i < (customEventList[event] || []).length; i++){
+        customEventList[event][i](...args);
+    }
+};

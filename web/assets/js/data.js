@@ -63,7 +63,19 @@ async function deleteWrdsIDB(callback) {
 // Input: JSON Object | <Number> (rank)
 async function deleteWrdFromIDB(inp){
     const db = await openWrdsIDB();
-    const r =  dltWrdRowIDB(db, (typeof inp == "object") ? inp : {rank: Number(inp)});
+    const r = await dltWrdRowIDB(db, (typeof inp == "object") ? inp : {rank: Number(inp)});
     db.close();
     return r;
+}
+
+// Update all data count
+async function updateWrdSttCntIDB(){
+    const db = await openWrdsIDB();
+    return [
+        await getWrdLstSttCnt(db, {status: 0}),
+        await getWrdLstSttCnt(db, {status: 1}),
+        await getWrdLstSttCnt(db, {status: 2}),
+        await getWrdLstSttCnt(db, {status: 3}),
+        await getWrdLstSttCnt(db, {status: 4})
+    ];
 }

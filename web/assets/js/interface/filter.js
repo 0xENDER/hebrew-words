@@ -30,3 +30,20 @@ filterYellowButton.onclick = () => toggleFilterOption(filterYellowButton, 1);
 filterRedButton.onclick = () => toggleFilterOption(filterRedButton, 2);
 filterGreenButton.onclick = () => toggleFilterOption(filterGreenButton, 3);
 filterBlueButton.onclick = () => toggleFilterOption(filterBlueButton, 4);
+
+// Update count for a filter
+function updateFilterCountNumber(elm, n){
+    elm.children[0].textContent = n;
+}
+
+// Update filters count
+async function updateFiltersCountUI(){
+    let c = await updateWrdSttCntIDB();
+    updateFilterCountNumber(filterNoneButton, c[0]);
+    updateFilterCountNumber(filterYellowButton, c[1]);
+    updateFilterCountNumber(filterRedButton, c[2]);
+    updateFilterCountNumber(filterGreenButton, c[3]);
+    updateFilterCountNumber(filterBlueButton, c[4]);
+}
+window.addCustomEventListener("idb-input", updateFiltersCountUI);
+window.addCustomEventListener("idb-load-all", updateFiltersCountUI);

@@ -39,6 +39,16 @@ function getWrdLstCnt(db){
     });
 }
 
+// Count words that share a status
+function getWrdLstSttCnt(db, obj){
+    return new Promise((resolve) => {
+        const countRequest = getWrdLstObj(db).index("status").count(obj.status);
+        countRequest.onsuccess = () => {
+            resolve(countRequest.result);
+        };
+    });
+}
+
 // Open a database
 // Returns <IDBObjectStore> read to hold the user's data
 function openWrdsIDB(){
@@ -91,6 +101,7 @@ async function addWrdtoIDB(db, obj){
     let r = getWrdLstObj(db).add(fObj);
     // Keep track of the IDB_COUNT value!
     IDB_COUNT = await getWrdLstCnt(db);
+    window.dispatchCustomEvent("idb-input", {action: "add"});
     return [r, fObj, IDB_COUNT != prvIDBCnt];
 }
 
@@ -107,6 +118,7 @@ function uptWrdtoIDB(db, obj){
             let r = objSt.put(nData);
             // Keep track of the IDB_COUNT value!
             IDB_COUNT = await getWrdLstCnt(db);
+            window.dispatchCustomEvent("idb-input", {action: "update"});
             resolve([r, nData]);
         }
         rq.onerror = () => {
@@ -122,6 +134,7 @@ function getAllWrdIDB(db){
         const req = getWrdLstObj(db).getAll();
         req.onsuccess = ()=> {
             const wrds = req.result;
+            window.dispatchCustomEvent("idb-load-all", undefined);
             resolve(wrds);
         }
         req.onerror = (err)=> {
@@ -138,6 +151,7 @@ function clrAllWrdIDB(db){
         const req = getWrdLstObj(db).clear();
         req.onsuccess = async () => {
             IDB_COUNT = await getWrdLstCnt(db);
+            window.dispatchCustomEvent("idb-input", {action: "clear-all"});
             resolve(true);
         }
         req.onerror = async (err) => {
@@ -157,12 +171,14 @@ function dltWrdsIDB(){
         const req = IDB.deleteDatabase(IDBName);
         IDB_COUNT = -1;
         req.onsuccess = function () {
+            window.dispatchCustomEvent("idb-input", {action: "delete-idb"});
             resolve(0);
         };
         req.onerror = function () {
             resolve(1);
         };
         req.onblocked = function () {
+            window.dispatchCustomEvent("idb-input", {action: "delete-idb"});
             resolve(2);
         };
     });
@@ -177,6 +193,7 @@ function dltWrdRowIDB(db, obj){
         const req = getWrdLstObj(db).delete(obj.rank);
         req.onsuccess = async () => {
             IDB_COUNT = await getWrdLstCnt(db);
+            window.dispatchCustomEvent("idb-input", {action: "delete"});
             resolve(true);
         };
         req.onerror = async () => {
