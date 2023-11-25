@@ -18,7 +18,6 @@ let previousRank = -1,
     previousRankC = 1,
     rowStatus = ["grey", "yellow", "red", "green", "blue"];
 function createWordRowDOM(scrollToView, hebrew, transliteration, english, status, rank = ""){
-    // console.log(hebrew, typeof rank, rank);
     // Reset previousRank on database reset!
     if(typeof rank == "number" && previousRank >= rank){
         previousRank = -1;

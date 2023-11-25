@@ -24,7 +24,6 @@ window.oncontextmenu = function(e){
             if(srcElm.hasAttribute("row-menu")){
                 e = {...e, srcElement: srcElm.parentElement, y: e.y, x: e.x};
             }
-            console.log(e.srcElement);
             showContextMenu(e, rowCM);
             updateContextMenuColour();
             updateRowContextMenuMode();
