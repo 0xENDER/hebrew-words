@@ -35,6 +35,12 @@
     min-width: 120px;
 }
 
+.table .row td:nth-child(3) {
+    font-family: Times New Roman, Arial, serif;
+    font-style: italic;
+    font-weight: lighter;
+}
+
 .table .row td:nth-child(4) {
     font-family: Narkisim, Times New Roman, Arial, serif;
 }
