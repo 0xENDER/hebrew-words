@@ -9,9 +9,9 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
 
 ## To-Do
 
-- [ ] Add custom context menu pop-up
-    - [ ] Add filtering
-    - [ ] Add the ability to add individual words
+- [x] Add custom context menu pop-up
+    - [x] Add filtering (simple CSS filtering, NEED a JS version to fix even/odd rows bug)
+    - [x] Add the ability to add individual words (NEEDS more work to perfect)
     - [x] Add English words 'cover'
     - [x] Add an export/import option
     - [x] Add a reset option
