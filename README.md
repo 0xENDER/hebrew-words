@@ -24,7 +24,9 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
     - [x] Add the ability to read aloud Hebrew words
 - [ ] Add cards slideshow (ain't got time for dat)
 - [ ] Add data saftey features (tbh, I'mma just keep exporting/importing my data all the time)
+    - [ ] Add the option to ignore/override duplicate words on import
     - [ ] Do a general data check whenever you import files/load the page
+    - [ ] Check IndexedDB health on updates
 
 ## Notes
 
