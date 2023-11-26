@@ -4,7 +4,7 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
 
 ## User notes
 
-- I feel like this tool is good enough for use now. But I don't trust myself with making bugs-free websites. So make sure to always export your data when you finish your studying sessions, and before you import any new lists to your current one!
+- I feel like this tool is good enough for use now. But I don't trust myself with making bug-free websites. So make sure to always export your data when you finish your studying sessions, and before you import any new lists to your current one!
 - You can use the character `~` to seperate between different pronunciations of a word in the input fields for the English word and word transliteration!
     > [`auto`, `meaning 1 / meaning 2~meaning 3`, `say~sai`, `word`]
 
