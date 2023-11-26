@@ -15,6 +15,11 @@
     background-color: #1f1f227a;
 }
 
+#progress_bar_zone[data-disable-cover]{
+    background-color: transparent;
+    pointer-events: none;
+}
+
 .progress-bar {
     background-color: #a3a9c7;
     padding-left: 0.5vw;

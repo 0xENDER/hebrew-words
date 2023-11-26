@@ -9,7 +9,11 @@ const progressBarCon = document.getElementById("progress_bar_zone"),
     progressBarElm = document.getElementById("progress-bar");
 
 // Show progress bar on screen
-function showProgressBarUI(quota, progress){
+function showProgressBarUI(quota, progress, cover = true){
+    // Update cover
+    progressBarCon.dataset.disableCover = cover;
+    // Block unwanted imports
+    importExportListButton.setAttribute("disabled", "");
     // Update progress bar
     updateProgressBarUI(quota, progress);
     // Show progress bar
@@ -23,6 +27,9 @@ function updateProgressBarUI(quota, progress){
 
 // Hide progress bar
 function hideProgressBarUI(){
+    // Hide progress bar
     progressBarCon.style.display = "none";
     updateProgressBarUI(1, 0);
+    // Allow other imports
+    importExportListButton.removeAttribute("disabled");
 }
