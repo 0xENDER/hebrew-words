@@ -104,7 +104,10 @@ async function updateWrdSttCntIDB(){
 // Get the highest rank value
 async function getHighestRankIDB(){
     const db = await openWrdsIDB();
-    const r = await getHghWrdRnk(db);
+    let r = {rank: 0};
+    if(IDB_COUNT > 0){
+        r = await getHghWrdRnk(db);
+    }
     db.close();
     return r;
 }
