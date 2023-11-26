@@ -16,7 +16,7 @@ checkWrdsIDB().then(function(r){
         // Load the data from the IDB
         initNormalVisit();
     }
-})
+});
 
 // Initiation functions
 function initFirstVisit(){
