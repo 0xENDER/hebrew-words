@@ -22,7 +22,8 @@
     padding: 12px;
 }
 
-.table .row td:nth-child(2) {
+.table .row td:nth-child(2),
+.table .head th:nth-child(2) {
     width: 100%;
 }
 
@@ -31,7 +32,9 @@
 }
 
 .table .row td:nth-child(3),
-.table .row td:nth-child(4) {
+.table .row td:nth-child(4),
+.table .head th:nth-child(3),
+.table .head th:nth-child(4) {
     min-width: 120px;
 }
 
