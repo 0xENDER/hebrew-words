@@ -5,18 +5,23 @@
  **/
 
 // Check if the user is new!
-checkWrdsIDB().then(function(r){
-    if(!r){
-        // Prompt the user for options!
-        showPrompt("Hello!", "Looks like you're new here!",
-            ["Start", initFirstVisit],
-            ["Import Data", initImport]
-        );
-    }else{
-        // Load the data from the IDB
-        initNormalVisit();
-    }
-});
+function isNew(){
+    return new Promise(function(resolve){
+        checkWrdsIDB().then(function(r){
+            if(!r){
+                // Prompt the user for options!
+                showPrompt("Hello!", "Looks like you're new here!",
+                    ["Start", initFirstVisit],
+                    ["Import Data", initImport]
+                );
+            }else{
+                // Load the data from the IDB
+                initNormalVisit();
+            }
+            resolve(true);
+        });    
+    });
+}
 
 // Initiation functions
 function initFirstVisit(){
@@ -43,3 +48,6 @@ function initImport(){
 function initNormalVisit(){
     getWrdsIDB(createWordRows);
 }
+
+// Start
+isNew();

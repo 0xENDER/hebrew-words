@@ -7,7 +7,7 @@
 // Show a prompt
 function showPrompt(title, message, ...args){
     if(args.length == 0){
-        // [(text)<String>, (callback)<Function>, (isPrimary)<Boolean>]
+        // [(text)<String>, (callback)<Function>, (isPrimary)<Boolean>, (isDisabled)<Boolean>]
         args = [["Ok", () => {}]];
     }
     createDialogElement(title, message, ...args);
@@ -27,6 +27,9 @@ function addDialogButton(inp){
     buttonElm.classList.add("no-context-menu");
     if(inp[2]){
         buttonElm.classList.add("primary", "no-context-menu");
+    }
+    if(inp[3]){
+        buttonElm.setAttribute("disabled", "");
     }
     return buttonElm;
 }

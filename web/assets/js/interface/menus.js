@@ -176,14 +176,7 @@ resetListButton.onclick = function(){
         ["Empty", async () => {
             let r = await removeAllWrdIDB();
             if(r){
-                // Stop list updates
-                terminateHeldListUpdates = true;
-                // Empty the list on screen!
-                let rows = TABLE_ELM.getElementsByClassName("ranked-row");
-                while(rows.length > 0){
-                    rows[0].remove();
-                }
-                delete rows;
+                emptyWordsListUI();
             }
         }]);
 };
@@ -204,7 +197,8 @@ removeWordButton.onclick = async function(){
 const importExportListButton = document.getElementById("import-export-list");
 importExportListButton.onclick = function(){
     showPrompt("Export/Import list!", "Note that newly imported lists will be combined with your current list!",
-        ["Export", exportWrdsLst, true], ["Import", () => importWrdsLstFile(createWordRows), true], ["Cancel", () => {}, false]);
+        ["Export", exportWrdsLst, true], ["Import", () => importWrdsLstFile(createWordRows), true],
+        ["Import (fast)", startInstantFileImport, true], ["Cancel", () => {}, false]);
 };
 
 // Toggle words cover (English)

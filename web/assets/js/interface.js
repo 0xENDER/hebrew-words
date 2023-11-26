@@ -132,3 +132,15 @@ function toggleWordsCoverEng() {
 function getRowPValue(rowElm, n){
     return rowElm.parentElement.childNodes[0].childNodes[n].textContent;
 }
+
+// Empty list on screen
+function emptyWordsListUI(){
+    // Stop list updates
+    terminateHeldListUpdatesUI();
+    // Empty the list on screen!
+    let rows = TABLE_ELM.getElementsByClassName("ranked-row");
+    while(rows.length > 0){
+        rows[0].remove();
+    }
+    delete rows;
+}

@@ -6,12 +6,15 @@
 
 
 // Get words from IDB
-let terminateHeldListUpdates = false;
+let terminateHeldListUpdates = false,
+    isListAwaitingUpdatesUI = false;
 async function getWrdsIDB(callback){
     const db = await openWrdsIDB();
     const data = await getAllWrdIDB(db);
+    isListAwaitingUpdatesUI = true;
     for(let i = 0; i < data.length; i++){
         if(terminateHeldListUpdates){
+            // IDK, I feel like a bug might pop up because of this...
             terminateHeldListUpdates = false;
             break;
         }
@@ -19,8 +22,18 @@ async function getWrdsIDB(callback){
         await sleep(RENDER_SLEEP);
         await renderBlock();
     }
+    isListAwaitingUpdatesUI = false;
     db.close();
     return data;
+}
+function terminateHeldListUpdatesUI(){
+    // Check if the list is awaiting updates
+    if(isListAwaitingUpdatesUI){
+        // Terminate
+        terminateHeldListUpdates = true;
+        // Make sure to release any render blocks!
+        updateRenderBlock();
+    }
 }
 
 // Update the status of a word in IDB

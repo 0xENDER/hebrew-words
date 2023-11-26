@@ -10,18 +10,20 @@
 // Import list
 // Input: <Array> of <JSON> objects (the list of words)
 //        <Function> for a callback for each successful import! (every word)
-async function importWrdsLst(wrdsLstObj, callback){
+async function importWrdsLst(wrdsLstObj, callback, allowSleep = true){
     const db = await openWrdsIDB();
     for (let i = 0; i < wrdsLstObj.length; i++){
         let r = await addWrdtoIDB(db, wrdsLstObj[i]);
         if(r[2]){
-            callback(r[1]);
+            callback(r[1], wrdsLstObj.length);
         }else{
             showPrompt("An error occurred!", "We couldn't save the imported list! Your list could be corrupted, or your storage could be full. Please try again!")
             db.close();
             break;
         }
-        await sleep(RENDER_SLEEP);
+        if(allowSleep){
+            await sleep(RENDER_SLEEP);
+        }
     }
     db.close();
 }
@@ -54,10 +56,36 @@ async function exportWrdsLst(){
 }
 
 // Import list from file
-function importWrdsLstFile(callback){
+function importWrdsLstFile(callback, delay = true){
     importFile(async function(file){
         let wrdsLst = JSON.parse(file);
-        await importWrdsLst(wrdsLst, callback);
+        await importWrdsLst(wrdsLst, callback, delay);
         delete wrdsLst;
     }, "json");
+}
+
+// Import list from file (without delay)
+function startInstantFileImport(){
+    // Wrap the progress bar update
+    let processedItems = 0,
+        progressBarOn = false;
+    const wrapCallback = (word, objLength) => {
+        if(!progressBarOn) {
+            // Show a progress bar
+            showProgressBarUI(1, 0);
+            progressBarOn = true;
+        }
+        updateProgressBarUI(objLength, ++processedItems);
+        delete word;
+        if(processedItems == objLength){
+            // Empty list on screen
+            emptyWordsListUI();
+            // Start loading the page as if it was a normal visit
+            setTimeout(() => {
+                isNew().then(hideProgressBarUI);
+            }, 0);
+        }
+    };
+    // Start import from file
+    importWrdsLstFile(wrapCallback, false);
 }

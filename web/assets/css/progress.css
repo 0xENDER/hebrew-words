@@ -1,0 +1,24 @@
+/**
+ *
+ * Progress bar style
+ *
+**/
+
+#progress_bar_zone {
+    display: block;
+    position: fixed;
+    z-index: 9999;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: #1f1f227a;
+}
+
+.progress-bar {
+    background-color: #a3a9c7;
+    padding-left: 0.5vw;
+    height: 6px;
+    width: 50%;
+    border-radius: 0px 100px 100px 0px;
+}
