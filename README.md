@@ -29,6 +29,7 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
     - [ ] Check IndexedDB health on updates
     - [ ] Add Google Drive backups!
 > I probably won't do these (unless I got time and I needed to use them)
+- [ ] Add a spelling test for the blue catagory!
 - [ ] Add cards slideshow (ain't got time for dat)
 - [ ] Improve on-screen list
     - [ ] Do JS filtering (to fix even/odd rows bug)
