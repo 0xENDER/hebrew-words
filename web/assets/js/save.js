@@ -26,6 +26,20 @@ async function importWrdsLst(wrdsLstObj, callback){
     db.close();
 }
 
+// Get current time string
+// YYYYMMDD-HHMM
+function getTimeStr(){
+    let date = new Date(),
+        year = date.getFullYear(),
+        month = ((date.getMonth() + 1) + '').padStart(2, '0'),
+        day = (date.getDate() + '').padStart(2, '0'),
+        hours = (date.getHours() + '').padStart(2, '0'),
+        minutes = (date.getMinutes() + '').padStart(2, '0');
+    let r = `${year}${month}${day}-${hours}${minutes}`
+    delete date, year, month, day, hours, minutes;
+    return r;
+}
+
 // Export IDB list
 async function exportWrdsLst(){
     const db = await openWrdsIDB();
@@ -35,7 +49,7 @@ async function exportWrdsLst(){
         delete list[i]["rank"];
     }
     //Download list
-    downloadJSON(list, "WORDS_LIST_EXPORT");
+    downloadJSON(list, `WORDS_LIST_EXPORT-${getTimeStr()}`);
     db.close();
 }
 
