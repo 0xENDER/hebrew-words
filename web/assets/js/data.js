@@ -11,6 +11,7 @@ let terminateHeldListUpdates = false,
 async function getWrdsIDB(callback){
     const db = await openWrdsIDB();
     const data = await getAllWrdIDB(db);
+    db.close();
     isListAwaitingUpdatesUI = true;
     for(let i = 0; i < data.length; i++){
         if(terminateHeldListUpdates){
@@ -23,7 +24,6 @@ async function getWrdsIDB(callback){
         await renderBlock();
     }
     isListAwaitingUpdatesUI = false;
-    db.close();
     return data;
 }
 function terminateHeldListUpdatesUI(){
@@ -34,14 +34,6 @@ function terminateHeldListUpdatesUI(){
         // Make sure to release any render blocks!
         updateRenderBlock();
     }
-}
-
-// Update the status of a word in IDB
-// NOT USED!
-async function updWrdStt(rnk){
-    const db = await openWrdsIDB();
-    db.close();
-    //store.put
 }
 
 // Add a new word
@@ -92,13 +84,15 @@ async function deleteWrdFromIDB(inp){
 // Update all data count
 async function updateWrdSttCntIDB(){
     const db = await openWrdsIDB();
-    return [
+    const r = [
         await getWrdLstSttCnt(db, {status: 0}),
         await getWrdLstSttCnt(db, {status: 1}),
         await getWrdLstSttCnt(db, {status: 2}),
         await getWrdLstSttCnt(db, {status: 3}),
         await getWrdLstSttCnt(db, {status: 4})
     ];
+    db.close();
+    return r;
 }
 
 // Get the highest rank value

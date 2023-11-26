@@ -160,16 +160,14 @@ blueRowButton.onclick = () => setRowColourStt(blueRowButton, 4);
 const resetListButton = document.getElementById("reset-list");
 resetListButton.onclick = function(){
     showPrompt("Reset List", "Would you like to reset the list completely, or just empty it?",
-        ["Reset (Reload Required)", () => {
+        ["Reset", () => {
             deleteWrdsIDB(function(success, code){
                 // For now, treat the `blocked` response as successful!
                 if(success || code == 2){ // Dunno why dis keeps happening <(._.)>
-                    setTimeout(function(){
-                        window.location.reload();
-                    }, 100);
+                    reloadContentUI(RELOAD_UPDATE);
                 }else{
                     showPrompt("Reset Error!", `We couldn't reset your list! (${(code == 1) ? "Error" : "Blocked"})`,
-                        ["Reload List", () => window.location.reload()]);
+                        ["Reload List", () => reloadContentUI(RELOAD_FATAL)]);
                 }
             });
         }],
@@ -189,7 +187,7 @@ removeWordButton.onclick = async function(){
     if(r){
         removeWordRowsFromList(rank);
     }else{
-        showPrompt("Error!", "We couldn't remove this word from your list!", ["Reload", () => window.location.reload()])
+        showPrompt("Error!", "We couldn't remove this word from your list!", ["Reload", () => reloadContentUI(RELOAD_FATAL)])
     }
 };
 

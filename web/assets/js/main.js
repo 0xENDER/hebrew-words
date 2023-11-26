@@ -11,8 +11,9 @@ function isNew(){
             if(!r){
                 // Prompt the user for options!
                 showPrompt("Hello!", "Looks like you're new here!",
-                    ["Start", initFirstVisit],
-                    ["Import Data", initImport]
+                    ["Start", initFirstVisit, true],
+                    ["Import", initImport],
+                    ["Import (fast)", initFastImport]
                 );
             }else{
                 // Load the data from the IDB
@@ -26,7 +27,7 @@ function isNew(){
 // Initiation functions
 function initFirstVisit(){
     function wrds(n){
-        let defaultList = getDefaultList(),
+        let defaultList = (n != 0) ? getDefaultList() : [],
             newList;
         newList = defaultList.slice(0, n);
         importWrdsLst(newList, createWordRows);
@@ -34,6 +35,7 @@ function initFirstVisit(){
     }
     showPrompt("Default List Import",
         "We are going to import a list Hebrew words that are ranked according to the feaquency of their use in written text. Please choose your threshold!",
+        ["Emtpy List", () => wrds(0)],
         ["790 words (~1 Month)", () => wrds(790)],
         ["1,580 words (~2 Months)", () => wrds(1580)],
         ["2,370 words (~3 Months)", () => wrds(2370)],
@@ -44,6 +46,9 @@ function initFirstVisit(){
 }
 function initImport(){
     importWrdsLstFile(createWordRows);
+}
+function initFastImport(){
+    startInstantFileImport();
 }
 function initNormalVisit(){
     getWrdsIDB(createWordRows);

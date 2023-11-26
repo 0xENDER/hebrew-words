@@ -46,13 +46,13 @@ function getTimeStr(){
 async function exportWrdsLst(){
     const db = await openWrdsIDB();
     let list = await getAllWrdIDB(db);
+    db.close();
     // Remove "rank" value
     for (let i = 0; i < list.length; i++){
         delete list[i]["rank"];
     }
     //Download list
     downloadJSON(list, `WORDS_LIST_EXPORT-${getTimeStr()}`);
-    db.close();
 }
 
 // Import list from file
@@ -78,12 +78,7 @@ function startInstantFileImport(){
         updateProgressBarUI(objLength, ++processedItems);
         delete word;
         if(processedItems == objLength){
-            // Empty list on screen
-            emptyWordsListUI();
-            // Start loading the page as if it was a normal visit
-            setTimeout(() => {
-                isNew().then(hideProgressBarUI);
-            }, 0);
+            reloadContentUI(RELOAD_UPDATE, hideProgressBarUI);
         }
     };
     // Start import from file

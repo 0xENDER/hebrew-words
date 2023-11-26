@@ -145,3 +145,19 @@ function trimArray(array){
     }
     return r;
 }
+
+// Reload page
+const RELOAD_UNKNOWN = 0, RELOAD_UPDATE = 1, RELOAD_FATAL = 2;
+function reloadContentUI(cause = RELOAD_UNKNOWN, callback = () => {}){
+    if(cause == RELOAD_UPDATE){
+        // Empty list on screen
+        emptyWordsListUI();
+        // Start loading the page as if it was a normal visit
+        setTimeout(() => {
+            isNew().then(callback);
+        }, 0);
+    }else{ // RELOAD_UNKNOWN & RELOAD_FATAL
+        // Reload all code
+        window.location.reload();
+    }
+}
