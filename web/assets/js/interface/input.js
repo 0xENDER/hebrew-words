@@ -101,7 +101,7 @@ window.onkeydown = async function(e){
             console.log(r);
 
             // Add row to screen
-            createWordRows(r[1], true, true);
+            createWordRows(r[1], null, true, true);
 
             // Clean up
             emptyRowInputsUI();

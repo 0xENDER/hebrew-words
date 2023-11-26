@@ -19,7 +19,7 @@ async function getWrdsIDB(callback){
             terminateHeldListUpdates = false;
             break;
         }
-        callback(data[i], false);
+        callback(data[i], null, false);
         await sleep(RENDER_SLEEP);
         await renderBlock();
     }

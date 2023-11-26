@@ -15,7 +15,7 @@
     background-color: #1f1f227a;
 }
 
-#progress_bar_zone[data-disable-cover]{
+#progress_bar_zone[data-disable-cover=true]{
     background-color: transparent;
     pointer-events: none;
 }

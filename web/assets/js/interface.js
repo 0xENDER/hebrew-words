@@ -77,7 +77,19 @@ function createWordRowDOM(scrollToView, smoothScroll, hebrew, transliteration, e
 }
 
 // Create word row
-async function createWordRows(word, scrollToView = true, smoothScroll = false){
+async function createWordRows(word, progress = null, scrollToView = true, smoothScroll = false){
+    if(Array.isArray(progress)){
+        // [quota, progress]
+        if(progress[1] <= 1){
+            showProgressBarUI(progress[0], progress[1], true);
+        }
+        if(progress[1] > 1){
+            updateProgressBarUI(progress[0], progress[1]);
+        }
+        if(progress[1] == progress[0]){
+            hideProgressBarUI();
+        }
+    }
     for(let i = 0; i < word.eng.length; i++){
         createWordRowDOM(scrollToView, smoothScroll, word.hb, word.phn[i], word.eng[i], word.status, (i == 0) ? word.rank : "");
     }

@@ -15,7 +15,7 @@ async function importWrdsLst(wrdsLstObj, callback, allowSleep = true){
     for (let i = 0; i < wrdsLstObj.length; i++){
         let r = await addWrdtoIDB(db, wrdsLstObj[i]);
         if(r[2]){
-            callback(r[1], wrdsLstObj.length);
+            callback(r[1], [wrdsLstObj.length, i + 1]);
         }else{
             showPrompt("An error occurred!", "We couldn't save the imported list! Your list could be corrupted, or your storage could be full. Please try again!")
             db.close();
@@ -67,17 +67,16 @@ function importWrdsLstFile(callback, delay = true){
 // Import list from file (without delay)
 function startInstantFileImport(){
     // Wrap the progress bar update
-    let processedItems = 0,
-        progressBarOn = false;
-    const wrapCallback = (word, objLength) => {
+    let progressBarOn = false;
+    const wrapCallback = (word, prog) => {
         if(!progressBarOn) {
             // Show a progress bar
-            showProgressBarUI(1, 0);
+            showProgressBarUI(1, 0, false);
             progressBarOn = true;
         }
-        updateProgressBarUI(objLength, ++processedItems);
+        updateProgressBarUI(prog[0], prog[1]);
         delete word;
-        if(processedItems == objLength){
+        if(prog[1] == prog[0]){
             reloadContentUI(RELOAD_UPDATE, hideProgressBarUI);
         }
     };

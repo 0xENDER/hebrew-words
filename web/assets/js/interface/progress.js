@@ -9,7 +9,7 @@ const progressBarCon = document.getElementById("progress_bar_zone"),
     progressBarElm = document.getElementById("progress-bar");
 
 // Show progress bar on screen
-function showProgressBarUI(quota, progress, cover = true){
+function showProgressBarUI(quota, progress, cover = false){
     // Update cover
     progressBarCon.dataset.disableCover = cover;
     // Block unwanted imports
