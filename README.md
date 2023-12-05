@@ -24,12 +24,16 @@ This is a tool that can help you memorise the most frequantly used words in Hebr
     - [x] Add the ability to copy Hebrew words
     - [x] Add the ability to read aloud Hebrew words
 > If I got the time, I'm probably going to work on the data safety features
+- [ ] Add the ability to edit data on-screen
 - [ ] Add data saftey features (tbh, I'mma just keep exporting/importing my data all the time)
     - [ ] Add the option to ignore/override duplicate words on import
     - [ ] Do a general data check whenever you import files/load the page
     - [ ] Check IndexedDB health on updates
     - [ ] Add Google Drive backups!
 > I probably won't do these (unless I got time and I needed to use them)
+- [ ] Add the ability to import data from "*Natsu's Sorter*"
+    - [ ] Add a "*Natsu's Sorter*" export data converter
+    - [ ] Support exports to "*Natsu's Sorter*"
 - [ ] Add a spelling test for the blue catagory!
 - [ ] Add cards slideshow (ain't got time for dat)
 - [ ] Improve on-screen list
